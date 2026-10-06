@@ -1,0 +1,129 @@
+---
+// Nivel 4 · Módulo 3 · Apoyo mínimo (R-6.x): solo se recuerda la estructura, sin ejemplos.
+import { Image } from 'astro:assets';
+import Nivel from '../../layouts/Nivel.astro';
+import BotonesIA from '../../components/BotonesIA.astro';
+import { img } from '../../data/imagenes';
+
+const situaciones = [
+  { icono: 'ico-asistente', titulo: 'Prepararse para una entrevista', texto: 'El asistente puede hacer de entrevistador para que usted practique en su casa, las veces que quiera. Pídale que le haga una pregunta a la vez y que espere su respuesta.', piense: '¿Quién entrevista? ¿Qué quiere practicar? ¿Cómo quiere que le ayude a mejorar?' },
+  { icono: 'ico-curriculum', titulo: 'Entender un documento', texto: 'Por ejemplo, una oferta de trabajo con palabras que no conoce. El asistente puede explicarle cada parte y sugerirle preguntas para el empleador.', piense: '¿Quién le explica? ¿Qué texto necesita entender? ¿Cómo quiere la explicación?', advertencia: true },
+  { icono: 'ico-caminos', titulo: 'Escribir un mensaje formal', texto: 'Por ejemplo, un mensaje para preguntar por una vacante. Léalo antes de enviarlo: ¿suena como usted? Agregue usted mismo su nombre y su teléfono al final.', piense: '¿Quién redacta? ¿Qué necesita decir? ¿Cómo: para WhatsApp, corto, cordial?' },
+];
+---
+
+<Nivel n={4} poseGuia="senala" saludo="Ya conoce la fórmula y ya la usó para su currículum. ¡Esa misma fórmula sirve para muchas otras cosas! Esta vez solo se la recordamos. Vea cuánto se acuerda usted.">
+  <div class="actividad">
+    <article class="tarjeta recordatorio" data-revelar>
+      <span class="sobretitulo">Solo el recordatorio</span>
+      <div class="tres-titulos">
+        <span class="t p-quien">QUIÉN</span><span class="punto">·</span>
+        <span class="t p-que">QUÉ</span><span class="punto">·</span>
+        <span class="t p-como">CÓMO</span>
+      </div>
+      <p>La fórmula es la misma para todo. Lo único que cambia es lo que usted necesita.</p>
+    </article>
+
+    <div class="grid-3" data-revelar>
+      {situaciones.map((s, i) => (
+        <article class="tarjeta situacion">
+          <Image src={img(s.icono)} alt="" width={96} class="flotar" style={`animation-delay:${-i}s`} />
+          <h3><span class="num">{i + 1}</span> {s.titulo}</h3>
+          <p>{s.texto}</p>
+          <p class="piense"><b>Piense:</b> {s.piense}</p>
+        </article>
+      ))}
+    </div>
+
+    <div class="alerta advertencia" role="note" data-revelar>
+      <span class="grande" aria-hidden="true">⚠️</span>
+      <div>
+        <b>La advertencia más importante de este nivel</b>
+        <p>Antes de pegar un texto, <b>borre nombres, números de teléfono, direcciones</b> y cualquier dato personal, suyo o de otras personas.</p>
+        <p>Si el documento es un <b>contrato, un trámite o algo sobre derechos laborales</b>, el asistente le puede ayudar a entender qué significa una palabra, pero no puede decirle qué debe hacer, cuánto tiempo tiene ni qué le corresponde. Eso se confirma en la institución que corresponde. <b>El asistente no sustituye a un abogado ni a una oficina oficial.</b></p>
+      </div>
+    </div>
+
+    <article class="tarjeta armador" data-revelar data-armador>
+      <span class="sobretitulo">Practique</span>
+      <h3>Arme su propia instrucción</h3>
+      <p>Elija una de las tres situaciones y escriba cada parte. Nosotros solo las unimos.</p>
+      <div class="campos">
+        <div class="campo p-quien"><label for="a-quien">QUIÉN</label><textarea id="a-quien" rows="2"></textarea></div>
+        <div class="campo p-que"><label for="a-que">QUÉ</label><textarea id="a-que" rows="3"></textarea></div>
+        <div class="campo p-como"><label for="a-como">CÓMO</label><textarea id="a-como" rows="2"></textarea></div>
+      </div>
+      <p class="alerta" data-alerta-pii hidden></p>
+      <p class="alerta info" data-alerta-vacio hidden>Complete las tres partes para unirlas.</p>
+      <button type="button" class="boton" data-unir>✨ Unir mi instrucción</button>
+      <div class="unida" data-unida hidden>
+        <div class="instruccion">
+          <div class="parte p-quien"><b class="rotulo">QUIÉN</b><p data-quien></p></div>
+          <div class="parte p-que"><b class="rotulo">QUÉ</b><p data-que></p></div>
+          <div class="parte p-como"><b class="rotulo">CÓMO</b><p data-como></p></div>
+        </div>
+        <div class="acciones-fila">
+          <button type="button" class="boton" data-copiar>📋 Copiar</button>
+          <BotonesIA />
+        </div>
+      </div>
+    </article>
+
+    <div class="alerta verde" data-revelar>
+      <span aria-hidden="true">⭐</span>
+      <span>Recuerde: usted es quien firma el mensaje. El asistente solo le ahorra el trabajo de empezar desde cero. <b>Nunca comparta, siempre verifique.</b></span>
+    </div>
+  </div>
+</Nivel>
+
+<style>
+  .recordatorio { text-align: center; }
+  .tres-titulos { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 6px 10px; margin: 8px 0 12px; }
+  .t { font-family: var(--fuente-titulo); font-weight: 800; font-size: clamp(1.8rem, 9vw, 2.8rem); color: var(--c); text-shadow: 0 0 22px color-mix(in srgb, var(--c) 70%, transparent); animation: encender 4.5s ease-in-out infinite; }
+  .t.p-que { animation-delay: .5s; } .t.p-como { animation-delay: 1s; }
+  @keyframes encender { 0%, 100% { opacity: 1; } 50% { opacity: .55; } }
+  .punto { font-size: 2rem; color: var(--texto-suave); }
+  .situacion :global(img) { width: 76px; margin-bottom: 6px; }
+  .situacion h3 { display: flex; gap: 8px; align-items: center; }
+  .num { flex: none; width: 32px; height: 32px; border-radius: 10px; display: grid; place-items: center; background: var(--brillo); color: #2a0a1c; font-size: 1rem; }
+  .piense { margin: 0; padding: 10px 12px; border-radius: 12px; background: rgba(255,255,255,.07); font-size: .98rem; }
+  .advertencia { font-weight: 600; background: rgba(255, 191, 60, .14); border-color: rgba(255, 191, 60, .7); }
+  .advertencia p { margin: 6px 0 0; }
+  .advertencia .grande { font-size: 1.8rem; line-height: 1; }
+  .campos { display: grid; gap: 12px; margin-bottom: 12px; }
+  .campo > label { font-family: var(--fuente-titulo); font-size: 1.25rem; letter-spacing: .08em; color: var(--c); }
+  .unida { margin-top: 16px; display: grid; gap: 14px; }
+</style>
+
+<script>
+  import { datoPersonal, copiar } from '../../scripts/utilidades';
+  const a = document.querySelector<HTMLElement>('[data-armador]')!;
+  const q = (s: string) => a.querySelector<HTMLTextAreaElement>(s)!;
+  const [quien, que, como] = [q('#a-quien'), q('#a-que'), q('#a-como')];
+  const pii = a.querySelector<HTMLElement>('[data-alerta-pii]')!;
+  const vacio = a.querySelector<HTMLElement>('[data-alerta-vacio]')!;
+  const unida = a.querySelector<HTMLElement>('[data-unida]')!;
+  let texto = '';
+  let aceptado = false;
+  [quien, que, como].forEach((t) => t.addEventListener('input', () => { aceptado = false; pii.hidden = true; }));
+  a.querySelector('[data-unir]')!.addEventListener('click', () => {
+    const v = [quien, que, como].map((t) => t.value.trim());
+    vacio.hidden = v.every(Boolean);
+    if (!vacio.hidden) return;
+    const d = v.map(datoPersonal).find(Boolean);
+    if (d && !aceptado) {
+      pii.hidden = false;
+      pii.textContent = `⚠ Parece que escribió ${d}. Bórrelo antes de usar la instrucción. Si no es un dato personal, toque «Unir» otra vez.`;
+      aceptado = true;
+      return;
+    }
+    pii.hidden = true;
+    a.querySelector('[data-quien]')!.textContent = v[0];
+    a.querySelector('[data-que]')!.textContent = v[1];
+    a.querySelector('[data-como]')!.textContent = v[2];
+    texto = v.join('\n');
+    unida.hidden = false;
+    unida.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  });
+  a.querySelector('[data-copiar]')!.addEventListener('click', () => copiar(texto, a.querySelector<HTMLElement>('.instruccion')!));
+</script>

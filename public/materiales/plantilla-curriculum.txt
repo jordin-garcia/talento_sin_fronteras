@@ -1,0 +1,52 @@
+﻿CURRÍCULUM VITAE — PLANTILLA
+Talento Sin Fronteras · Complete lo que está entre corchetes [ ] con su información.
+Escriba solo lo que de verdad hizo. Usted decide qué incluir.
+
+==================================================
+1. DATOS DE CONTACTO
+==================================================
+Nombre: [SU NOMBRE COMPLETO]
+Teléfono: [SU NÚMERO]
+Correo: [SU CORREO, si tiene]
+Municipio: [MUNICIPIO DONDE VIVE]
+(No hace falta la dirección exacta ni el número de documento.)
+
+==================================================
+2. PERFIL
+==================================================
+[Dos o tres líneas: quién es usted y qué sabe hacer.
+Ejemplo ficticio: Ayudante de cocina con cuatro años de experiencia en preparación
+de alimentos, orden y limpieza. Responsable, puntual y acostumbrado/a a trabajar bajo presión.]
+
+==================================================
+3. EXPERIENCIA (empiece por la más reciente)
+==================================================
+Puesto: [NOMBRE DEL PUESTO]
+Lugar y país: [EMPRESA O LUGAR, PAÍS]
+Años: [DESDE – HASTA]
+- [Lo que hacía día a día]
+- [Herramientas, máquinas o idiomas que usaba]
+- [De qué era responsable]
+
+Puesto: [NOMBRE DEL PUESTO]
+Lugar y país: [EMPRESA O LUGAR, PAÍS]
+Años: [DESDE – HASTA]
+- [ ]
+- [ ]
+
+==================================================
+4. HABILIDADES E IDIOMAS
+==================================================
+- [Habilidad 1: por ejemplo, atención al cliente]
+- [Habilidad 2: por ejemplo, trabajo en equipo]
+- [Habilidad 3: por ejemplo, adaptación a lugares nuevos]
+- Idiomas: [Español / inglés básico / otro]
+
+==================================================
+5. FORMACIÓN
+==================================================
+- [Curso, taller o escuela — año]
+
+--------------------------------------------------
+Recuerde: nunca comparta datos personales con la herramienta de IA.
+Escriba sus datos de contacto usted mismo, aquí, en su documento.

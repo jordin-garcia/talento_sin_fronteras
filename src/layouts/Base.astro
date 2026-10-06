@@ -1,0 +1,52 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITIO } from '../data/sitio';
+import { url } from '../scripts/ruta';
+
+interface Props {
+  titulo?: string;
+  descripcion?: string;
+  inicio?: boolean;
+}
+const { titulo, descripcion = SITIO.descripcion, inicio = false } = Astro.props;
+const tituloCompleto = titulo ? `${titulo} · ${SITIO.nombre}` : `${SITIO.nombre} · ${SITIO.lema}`;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{tituloCompleto}</title>
+    <meta name="description" content={descripcion} />
+    <meta name="theme-color" content="#0a0c2a" />
+    <meta name="referrer" content="no-referrer" />
+    <link rel="icon" href={url('/logo.svg')} type="image/svg+xml" />
+    <link rel="apple-touch-icon" href={url('/apple-touch-icon.png')} />
+    <link rel="manifest" href={url('/manifest.webmanifest')} />
+    <meta property="og:title" content={tituloCompleto} />
+    <meta property="og:description" content={descripcion} />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content={new URL(url('/og.jpg'), Astro.site).href} />
+    <script is:inline>document.documentElement.classList.add('js');</script>
+  </head>
+  <body class:list={{ inicio }}>
+    <div class="cielo" aria-hidden="true"></div>
+    <div class="estrellas" aria-hidden="true"></div>
+    <a class="sr-only" href="#contenido">Saltar al contenido</a>
+    <Header inicio={inicio} />
+    <main id="contenido">
+      <slot />
+    </main>
+    <Footer />
+    <script>
+      import { pintar } from '../scripts/progreso';
+      pintar();
+      if ('serviceWorker' in navigator && location.protocol === 'https:') {
+        navigator.serviceWorker.register(import.meta.env.BASE_URL + 'sw.js').catch(() => {});
+      }
+    </script>
+  </body>
+</html>

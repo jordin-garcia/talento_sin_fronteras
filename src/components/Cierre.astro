@@ -1,0 +1,59 @@
+---
+import { Image, getImage } from 'astro:assets';
+import { img } from '../data/imagenes';
+import { url } from '../scripts/ruta';
+import OfreceNo from './OfreceNo.astro';
+const fondo = await getImage({ src: img('amanecer'), width: 1200, format: 'webp', quality: 80 });
+---
+
+<section class="cierre" style={`--fondo:url(${fondo.src})`} aria-labelledby="cierre-titulo">
+  <div class="capa" aria-hidden="true"></div>
+  <div class="contenedor contenido">
+    <div class="mensaje" data-revelar>
+      <span class="sobretitulo">Un nuevo amanecer</span>
+      <h2 id="cierre-titulo">Usted ya sabe mucho.<br />Hoy suma una herramienta más.</h2>
+      <p>Todo lo que aprendió trabajando vale. Esta ruta solo le ayuda a contarlo con claridad, a su ritmo y desde su teléfono.</p>
+      <a class="boton" href="#camino" data-comenzar>Seguir mi camino <span aria-hidden="true">›</span></a>
+    </div>
+    <div class="guias-cierre" aria-hidden="true">
+      <Image src={img('ixchel-celebra')} alt="" widths={[200, 320]} sizes="38vw" class="flotar" />
+      <Image src={img('balam-celebra')} alt="" widths={[200, 320]} sizes="38vw" class="flotar" style="animation-delay:-2.2s" />
+    </div>
+    <div class="tarjeta ofrece-caja"><OfreceNo /></div>
+    <p class="compartir" data-revelar>¿Conoce a alguien a quien le sirva? <b>Comparta este enlace</b> con su familia y amistades.</p>
+    <p class="compartir-btn" data-revelar><a class="boton secundario chico" href={url('/')} data-compartir>Compartir la plataforma</a></p>
+  </div>
+</section>
+
+<style>
+  .cierre { position: relative; padding: clamp(80px, 18vw, 160px) 0 60px; overflow: hidden; isolation: isolate; }
+  .capa {
+    position: absolute; inset: 0; z-index: -1;
+    background: linear-gradient(180deg, var(--cielo-c, #2a2470) 0%, transparent 22%, transparent 55%, rgba(10, 12, 42, 0.92) 100%), var(--fondo) center 30% / cover no-repeat;
+  }
+  .contenido { display: grid; gap: 24px; }
+  .mensaje { text-align: center; max-width: 640px; margin-inline: auto; padding: 22px 18px; border-radius: 26px; background: rgba(40, 20, 80, 0.45); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,.2); }
+  .mensaje h2 { text-shadow: 0 4px 20px rgba(80, 20, 60, 0.7); }
+  .mensaje p { font-weight: 600; }
+  .sobretitulo { color: #fff2c4; }
+  .guias-cierre { display: flex; justify-content: center; gap: 4vw; margin-top: -6px; }
+  .guias-cierre :global(img) { width: min(38vw, 220px); filter: drop-shadow(0 14px 18px rgba(0,0,0,.45)); }
+  .ofrece-caja { background: rgba(14, 16, 60, 0.82); }
+  .compartir { text-align: center; margin: 0; font-weight: 600; }
+  .compartir-btn { text-align: center; margin: 0; }
+</style>
+
+<script>
+  import { copiar } from '../scripts/utilidades';
+  document.querySelectorAll<HTMLAnchorElement>('[data-compartir]').forEach((a) =>
+    a.addEventListener('click', async (e) => {
+      e.preventDefault();
+      const datos = { title: 'Talento Sin Fronteras', text: 'Aprenda a usar la inteligencia artificial desde su teléfono, gratis y sin registro.', url: location.origin + import.meta.env.BASE_URL };
+      if (navigator.share) {
+        try { await navigator.share(datos); } catch {}
+      } else {
+        await copiar(datos.url, undefined, '✔ Enlace copiado. Péguelo en WhatsApp para compartirlo');
+      }
+    })
+  );
+</script>

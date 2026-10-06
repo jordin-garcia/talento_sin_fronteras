@@ -1,0 +1,154 @@
+---
+import { Image } from 'astro:assets';
+import { NIVELES } from '../data/sitio';
+import { img, ICONO_NIVEL, DIORAMA_NIVEL } from '../data/imagenes';
+import { url } from '../scripts/ruta';
+import Luciernagas from './Luciernagas.astro';
+
+const estaciones = [
+  ...NIVELES.map((n) => ({
+    n: n.n, etiqueta: `NIVEL ${n.n}`, titulo: n.titulo, resumen: n.resumen, minutos: n.minutos,
+    apoyo: n.apoyoTexto, href: url(n.slug), brillo: n.brillo, final: false,
+  })),
+  {
+    n: 6, etiqueta: 'FINAL', titulo: 'Su morral de herramientas', resumen: 'Guarde su tarjeta, su guía de bolsillo, el banco de ejemplos y cree su reconocimiento.',
+    minutos: 0, apoyo: 'Para guardar y compartir', href: url('/morral'), brillo: '#ffc94a', final: true,
+  },
+];
+---
+
+<section id="camino" class="camino seccion" aria-labelledby="camino-titulo">
+  <div class="titulo-seccion contenedor" data-revelar>
+    <span class="sobretitulo">La ruta del lago</span>
+    <h2 id="camino-titulo">Su camino de aprendizaje</h2>
+    <p>Cinco niveles cortos, uno después del otro. Cada nivel tiene un video, su versión en texto y una práctica. En total, unos 60 minutos.</p>
+  </div>
+
+  <div class="camino-contenedor contenedor">
+    <svg class="sendero" aria-hidden="true" preserveAspectRatio="none">
+      <defs>
+        <linearGradient id="grad-sendero" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#b06bff" />
+          <stop offset=".5" stop-color="#22c3d0" />
+          <stop offset="1" stop-color="#ffbf3c" />
+        </linearGradient>
+        <mask id="mascara-sendero" maskUnits="userSpaceOnUse"><path class="sendero-mascara" fill="none" stroke="#fff" stroke-width="40" stroke-linecap="round" pathLength="1" /></mask>
+      </defs>
+      <path class="sendero-piedras" fill="none" />
+      <path class="sendero-brillo" fill="none" mask="url(#mascara-sendero)" />
+    </svg>
+
+    <Image src={img('pinos')} alt="" width={180} class="deco deco-pinos-1" aria-hidden="true" />
+    <Image src={img('farol')} alt="" width={110} class="deco deco-farol-1" aria-hidden="true" />
+    <Image src={img('flores')} alt="" width={140} class="deco deco-flores-1" aria-hidden="true" />
+    <Image src={img('cayuco')} alt="" width={200} class="deco deco-cayuco" aria-hidden="true" />
+    <Image src={img('pinos')} alt="" width={170} class="deco deco-pinos-2" aria-hidden="true" />
+    <Image src={img('farol')} alt="" width={100} class="deco deco-farol-2" aria-hidden="true" />
+    <Image src={img('flores')} alt="" width={130} class="deco deco-flores-2" aria-hidden="true" />
+    <Image src={img('quetzal')} alt="" width={260} class="quetzal" aria-hidden="true" />
+    <Luciernagas cantidad={22} />
+
+    <ol class="estaciones">
+      {estaciones.map((e, i) => (
+        <li class:list={['estacion', i % 2 === 0 ? 'izq' : 'der', { final: e.final }]} data-nivel={e.n} data-estacion style={`--brillo:${e.brillo}`}>
+          <a class="diorama" href={e.href} tabindex="-1" aria-hidden="true">
+            <span class="halo"></span>
+            <Image src={img(DIORAMA_NIVEL[e.n])} alt="" widths={[260, 400, 560]} sizes="(min-width: 900px) 400px, 50vw" class="flotar" style={`animation-delay:${-i * 0.8}s`} />
+            <span class="letrero">
+              <Image src={img('letrero')} alt="" width={180} />
+              <span>{e.etiqueta}</span>
+            </span>
+            <span class="sello" title="Nivel completado">✔</span>
+          </a>
+          <div class="info">
+            <h3>
+              <Image src={img(ICONO_NIVEL[e.n])} alt="" width={56} class="icono" />
+              <span>{e.titulo}</span>
+            </h3>
+            <p>{e.resumen}</p>
+            <p class="meta">
+              {e.minutos > 0 && <span class="chip">⏱ {e.minutos} min</span>}
+              <span class="chip apoyo">{e.apoyo}</span>
+            </p>
+            <a class="boton chico" href={e.href}>
+              <span class="txt-entrar">{e.final ? 'Abrir el morral' : 'Entrar'}</span>
+              <span class="txt-repasar">Repasar</span>
+              <span aria-hidden="true">›</span>
+            </a>
+            <span class="aqui" aria-hidden="true">📍 Usted va aquí</span>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<style>
+  .camino { padding-bottom: 40px; overflow-x: clip; }
+  .camino-contenedor { position: relative; }
+  .sendero { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; }
+  .sendero-piedras { stroke: rgba(176, 186, 255, 0.24); stroke-width: 20; stroke-linecap: round; stroke-dasharray: 0.1 34; }
+  .sendero-brillo { stroke: url(#grad-sendero); stroke-width: 11; stroke-linecap: round; stroke-dasharray: 0.1 34; filter: drop-shadow(0 0 6px rgba(255, 220, 140, 0.9)); }
+
+  .estaciones { list-style: none; margin: 0; padding: 0; display: grid; gap: clamp(36px, 10vw, 90px); position: relative; }
+  .estacion { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 4px; position: relative; }
+  .estacion.der .diorama { order: 2; }
+  .diorama { position: relative; display: block; text-decoration: none; }
+  .diorama :global(img.flotar) { position: relative; z-index: 1; width: 100%; filter: drop-shadow(0 18px 24px rgba(0, 0, 0, 0.55)); }
+  .halo {
+    position: absolute; inset: 8%; border-radius: 50%; z-index: 0;
+    background: radial-gradient(circle, color-mix(in srgb, var(--brillo) 70%, transparent), transparent 68%);
+    filter: blur(14px); animation: pulso 3.4s ease-in-out infinite;
+  }
+  @keyframes pulso { 0%, 100% { opacity: 0.55; transform: scale(0.92); } 50% { opacity: 1; transform: scale(1.06); } }
+  .letrero { position: absolute; z-index: 2; bottom: 2%; width: 50%; max-width: 150px; left: 4%; transform: rotate(-4deg); }
+  .der .letrero { left: auto; right: 4%; transform: rotate(4deg); }
+  .letrero :global(img) { width: 100%; filter: drop-shadow(0 6px 8px rgba(0,0,0,.5)); }
+  .letrero span {
+    position: absolute; inset: 22% 8% 10%; display: grid; place-items: center;
+    font-family: var(--fuente-titulo); font-weight: 800; font-size: clamp(0.82rem, 3.4vw, 1.15rem); color: #fff6e0; letter-spacing: 0.04em;
+    text-shadow: 0 2px 0 #5a2f0e, 0 0 10px rgba(255, 200, 120, 0.6);
+  }
+  .sello {
+    position: absolute; z-index: 3; top: 6%; right: 8%; width: 44px; height: 44px; border-radius: 50%;
+    display: none; place-items: center; font-size: 1.4rem; font-weight: 900; color: #04331c;
+    background: linear-gradient(180deg, #6ff0b0, #22b46e); box-shadow: 0 0 0 4px rgba(255,255,255,.85), 0 0 22px rgba(58, 208, 138, 0.9);
+  }
+  .der .sello { right: auto; left: 8%; }
+  .hecho .sello { display: grid; }
+
+  .info { position: relative; z-index: 2; padding: 4px 4px 4px 8px; }
+  .der .info { padding: 4px 8px 4px 4px; }
+  .info h3 { display: flex; align-items: center; gap: 8px; color: color-mix(in srgb, var(--brillo) 55%, white); text-shadow: 0 0 18px color-mix(in srgb, var(--brillo) 60%, transparent); }
+  .info h3 :global(.icono) { width: clamp(34px, 9vw, 52px); flex: none; filter: drop-shadow(0 4px 6px rgba(0,0,0,.5)); }
+  .info p { color: var(--texto-suave); font-size: clamp(0.95rem, 3.6vw, 1.05rem); margin-bottom: 0.6em; }
+  .meta { display: flex; flex-wrap: wrap; gap: 6px; }
+  .meta .chip { font-size: 0.8rem; }
+  .apoyo { border-color: color-mix(in srgb, var(--brillo) 60%, transparent); }
+  .txt-repasar { display: none; }
+  .hecho .txt-entrar { display: none; }
+  .hecho .txt-repasar { display: inline; }
+  .hecho .boton { --bg: linear-gradient(180deg, #3b4bc4, #2a3596); color: #fff; box-shadow: 0 6px 0 #1a2066; }
+  .aqui { display: none; margin-top: 10px; font-weight: 800; color: var(--como); font-size: 0.92rem; animation: rebotar 1.4s ease-in-out infinite; }
+  .actual .aqui { display: block; }
+  @keyframes rebotar { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+
+  .final .halo { inset: 0; }
+  .final .info h3 { color: #ffe08a; }
+
+  .deco { position: absolute; z-index: 0; pointer-events: none; opacity: 0.85; height: auto; }
+  .deco-pinos-1 { width: 26vw; max-width: 170px; left: -6%; top: 13%; }
+  .deco-farol-1 { width: 15vw; max-width: 100px; right: -2%; top: 30%; }
+  .deco-flores-1 { width: 20vw; max-width: 130px; left: -4%; top: 47%; }
+  .deco-cayuco { width: 32vw; max-width: 200px; right: -6%; top: 62%; }
+  .deco-pinos-2 { width: 24vw; max-width: 160px; left: -7%; top: 78%; }
+  .deco-farol-2 { width: 14vw; max-width: 90px; right: 0; top: 88%; }
+  .deco-flores-2 { width: 18vw; max-width: 120px; right: 2%; top: 4%; }
+  .quetzal { position: absolute; z-index: 4; width: 40vw; max-width: 260px; top: 36%; left: -45%; pointer-events: none; filter: drop-shadow(0 10px 14px rgba(0,0,0,.4)); }
+
+  @media (min-width: 900px) {
+    .estacion { grid-template-columns: 1fr 1fr; gap: 40px; }
+    .diorama { max-width: 420px; justify-self: center; }
+    .info { max-width: 420px; }
+  }
+</style>

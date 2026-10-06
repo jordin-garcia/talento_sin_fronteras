@@ -1,0 +1,73 @@
+---
+// Banco de ejemplos navegable (R-8.2).
+import Base from '../layouts/Base.astro';
+import { CASOS, TIPOS } from '../data/banco';
+import { url } from '../scripts/ruta';
+---
+
+<Base titulo="Banco de ejemplos" descripcion="Diez casos ficticios resueltos con la fórmula Quién · Qué · Cómo.">
+  <section class="banco contenedor">
+    <a class="volver" href={url('/morral')}>‹ Volver al morral</a>
+    <span class="sobretitulo">Banco de ejemplos</span>
+    <h1>Diez casos con la fórmula a la vista</h1>
+    <p class="intro">Todos los casos son <b>ficticios</b>. No están para copiarlos tal cual, sino para que usted <b>reconozca el patrón</b>: quién, qué y cómo. Toque un tipo para filtrar.</p>
+
+    <div class="filtros" role="group" aria-label="Filtrar por tipo">
+      <button type="button" aria-pressed="true" data-filtro="todos">Todos</button>
+      {Object.entries(TIPOS).map(([k, t]) => <button type="button" aria-pressed="false" data-filtro={k}>{t.emoji} {t.nombre}</button>)}
+    </div>
+
+    <ul class="casos">
+      {CASOS.map((c) => (
+        <li class="caso" data-tipo={c.tipo}>
+          <p class="tipo">{TIPOS[c.tipo].emoji} {TIPOS[c.tipo].nombre} <span class="etiqueta-ficticio">Ficticio</span></p>
+          <h2>{c.titulo}</h2>
+          <p class="situacion">{c.situacion}</p>
+          <div class="instruccion">
+            <div class="parte p-quien"><b class="rotulo">QUIÉN</b><p>{c.quien}</p></div>
+            <div class="parte p-que"><b class="rotulo">QUÉ</b><p>{c.que}</p></div>
+            <div class="parte p-como"><b class="rotulo">CÓMO</b><p>{c.como}</p></div>
+          </div>
+          <p class="consejo">💡 {c.consejo}</p>
+          <button type="button" class="boton secundario chico" data-copiar={`${c.quien}\n${c.que}\n${c.como}`}>📋 Copiar para adaptarlo</button>
+        </li>
+      ))}
+    </ul>
+    <p class="alerta info">Antes de usar un ejemplo, cámbielo con <b>su</b> información. Y recuerde: <b>nunca comparta</b> datos personales, <b>siempre verifique</b> lo que responda la IA.</p>
+  </section>
+</Base>
+
+<style>
+  .banco { padding: 88px 0 40px; }
+  .volver { display: inline-flex; min-height: 44px; align-items: center; font-weight: 800; color: var(--texto-suave); text-decoration: none; }
+  h1 { font-size: clamp(2rem, 8.5vw, 3rem); }
+  .intro { color: var(--texto-suave); max-width: 44em; }
+  .filtros { display: flex; gap: 8px; overflow-x: auto; padding: 4px 2px 12px; scrollbar-width: none; }
+  .filtros button { flex: none; min-height: 46px; padding: .4em 1em; border-radius: 999px; font-weight: 800; background: rgba(255,255,255,.08); border: 2px solid var(--borde); cursor: pointer; }
+  .filtros button[aria-pressed="true"] { background: var(--como); color: #3a1d00; border-color: #fff; }
+  .casos { list-style: none; padding: 0; margin: 8px 0 20px; display: grid; gap: 16px; }
+  @media (min-width: 900px) { .casos { grid-template-columns: 1fr 1fr; } }
+  .caso { display: grid; gap: 10px; align-content: start; padding: 20px 18px; border-radius: 24px; background: var(--vidrio); border: 1px solid var(--borde); animation: aparecer .4s ease; }
+  .caso[hidden] { display: none; }
+  @keyframes aparecer { from { opacity: 0; transform: translateY(10px); } }
+  .tipo { margin: 0; font-weight: 800; color: var(--texto-suave); display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  .caso h2 { font-size: 1.45rem; margin: 0; }
+  .situacion { margin: 0; }
+  .consejo { margin: 0; font-weight: 700; color: #ffe2a8; }
+  .caso .boton { justify-self: start; }
+</style>
+
+<script>
+  import { copiar } from '../scripts/utilidades';
+  const botones = document.querySelectorAll<HTMLButtonElement>('[data-filtro]');
+  botones.forEach((b) =>
+    b.addEventListener('click', () => {
+      botones.forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+      const f = b.dataset.filtro;
+      document.querySelectorAll<HTMLElement>('.caso').forEach((c) => (c.hidden = f !== 'todos' && c.dataset.tipo !== f));
+    })
+  );
+  document.querySelectorAll<HTMLButtonElement>('[data-copiar]').forEach((b) =>
+    b.addEventListener('click', () => copiar(b.dataset.copiar!, b.previousElementSibling as HTMLElement, '✔ Copiado. Cámbielo con su información antes de usarlo'))
+  );
+</script>

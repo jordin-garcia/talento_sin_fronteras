@@ -1,0 +1,17 @@
+---
+// Botón "Abrir la herramienta de IA" (P6: excepción acordada) con alternativa.
+import { SITIO } from '../data/sitio';
+---
+
+<div class="botones-ia">
+  <a class="boton secundario" href={SITIO.herramientaIA.url} target="_blank" rel="noopener noreferrer">
+    🤖 Abrir la herramienta de IA <span class="sr-only">({SITIO.herramientaIA.nombre}, se abre en otra pestaña)</span>
+  </a>
+  <p class="alterna">Se abre {SITIO.herramientaIA.nombre}. ¿Prefiere otra? <a href={SITIO.herramientaAlterna.url} target="_blank" rel="noopener noreferrer">Usar {SITIO.herramientaAlterna.nombre}</a></p>
+</div>
+
+<style>
+  .botones-ia { display: grid; gap: 6px; justify-items: start; }
+  .alterna { margin: 0; font-size: 0.9rem; color: var(--texto-suave); }
+  .alterna a { color: var(--como); font-weight: 800; }
+</style>

@@ -1,0 +1,357 @@
+[
+ {
+  "numero": 1,
+  "titulo": "Su asistente de IA: qué es y cómo pedirle bien",
+  "escenas": [
+   {
+    "numero": 1,
+    "titulo": "Bienvenida",
+    "tiempo": "0:00 – 0:46",
+    "enPantalla": "Título “Su asistente de IA”. Una persona con un teléfono en la mano.",
+    "parrafos": [
+     "Bienvenido, bienvenida. Gracias por estar aquí.",
+     "Antes de empezar, queremos decirle algo importante: usted ya sabe hacer muchas cosas. Trabajó, se adaptó a lugares nuevos y salió adelante. Este curso no le va a enseñar a trabajar, porque eso usted ya lo sabe. Le va a enseñar a usar una herramienta gratuita, desde su teléfono, para ahorrar tiempo cuando necesite escribir algo, como su currículum.",
+     "En este video veremos qué es un asistente de inteligencia artificial, una fórmula sencilla para pedirle bien las cosas y dos reglas para usarlo con seguridad."
+    ]
+   },
+   {
+    "numero": 2,
+    "titulo": "Qué es un asistente de IA",
+    "tiempo": "0:46 – 1:31",
+    "enPantalla": "Chat simulado con una pregunta y una respuesta. Rótulo: “Asistente de inteligencia artificial”.",
+    "parrafos": [
+     "¿Qué es un asistente de inteligencia artificial? Es un programa con el que usted conversa por escrito, casi como por WhatsApp. Usted escribe lo que necesita y el programa le responde con un texto. Puede ayudarle a redactar un mensaje, a ordenar sus ideas o a explicar algo con palabras sencillas.",
+     "Piense en un ayudante que escribe muy rápido. Pero fíjese bien: es solo un ayudante. No es una persona, no conoce su vida y no es una autoridad. Usted es quien decide qué se queda y qué se cambia."
+    ]
+   },
+   {
+    "numero": 3,
+    "titulo": "Qué esperar de él",
+    "tiempo": "1:31 – 2:22",
+    "enPantalla": "Dos columnas. ✔ Sirve para: redactar, ordenar, explicar. ✘ No confíe para: trámites, plazos, leyes.",
+    "parrafos": [
+     "¿Qué se puede esperar de este ayudante? Es muy bueno para redactar, para ordenar ideas y para explicar, y lo hace en pocos segundos.",
+     "Pero tiene un límite importante: a veces se equivoca, y cuando se equivoca no avisa. Escribe algo falso con la misma seguridad con que escribe algo verdadero. Por eso no debe usarse para informarse sobre trámites, plazos, requisitos o leyes. Eso se consulta siempre en la institución que corresponde.",
+     "Y algo más: la respuesta depende de cómo usted pida. Si pide algo vago, recibe algo vago. Si pide con claridad, recibe algo mucho mejor. Para eso sirve la fórmula."
+    ]
+   },
+   {
+    "numero": 4,
+    "titulo": "La fórmula: quién, qué y cómo",
+    "tiempo": "2:22 – 3:57",
+    "enPantalla": "Tres bloques de color que aparecen uno por uno: 1 QUIÉN, 2 QUÉ, 3 CÓMO. Al final se ve la instrucción completa (ejemplo ficticio).",
+    "parrafos": [
+     "La fórmula tiene tres partes, y son tres palabras fáciles de recordar: quién, qué y cómo.",
+     "Primera parte: quién. Aquí usted le dice al asistente qué papel debe tener, igual que cuando le explica a un ayudante nuevo lo que va a hacer. Por ejemplo: “Actúa como un asesor que ayuda a redactar currículums”.",
+     "Segunda parte: qué. Aquí usted le explica lo que necesita y cuál es su situación. Cuanto más claro, mejor. Por ejemplo: “Necesito presentar mi experiencia en cocina. Trabajé cuatro años en un restaurante, preparando alimentos y manteniendo la cocina limpia”.",
+     "Tercera parte: cómo. Aquí usted le dice en qué forma quiere la respuesta. Por ejemplo: “Escríbelo en tres frases cortas y con palabras sencillas”.",
+     "Si juntamos las tres partes, la instrucción completa queda así: “Actúa como un asesor que ayuda a redactar currículums. Necesito presentar mi experiencia en cocina; trabajé cuatro años en un restaurante, preparando alimentos y manteniendo la cocina limpia. Escríbelo en tres frases cortas y con palabras sencillas”.",
+     "Quién, qué y cómo. Si se le olvida alguna parte, no pasa nada: puede volver a intentarlo. Con estas tres partes, las respuestas mejoran mucho."
+    ]
+   },
+   {
+    "numero": 5,
+    "titulo": "Las dos reglas",
+    "tiempo": "3:57 – 5:13",
+    "enPantalla": "Lista “Nunca comparta” con íconos tachados (DPI o pasaporte, dirección exacta, situación migratoria, contraseñas, datos del banco). Lista “Siempre verifique”.",
+    "parrafos": [
+     "Ahora, las dos reglas. Son más importantes que la fórmula.",
+     "Regla número uno: nunca comparta datos que le puedan causar problemas. Esto incluye su número de DPI o de pasaporte, su dirección exacta, su situación migratoria, sus contraseñas, los datos de su cuenta del banco y las fotos de documentos personales. Si en su currículum necesita poner su número de teléfono o su correo, escríbalos usted mismo al final, en el documento, y no dentro de la conversación con el asistente.",
+     "Regla número dos: siempre verifique. Todo lo que el asistente escriba, léalo con calma. ¿Las fechas están bien? ¿Los nombres están bien? ¿Todo lo que dice es cierto? Y si se trata de trámites, plazos, requisitos o derechos laborales, no se quede con lo que diga el asistente: confírmelo en la institución que corresponde, como el Ministerio de Trabajo o la oficina de atención al migrante.",
+     "Nunca comparta, siempre verifique."
+    ]
+   },
+   {
+    "numero": 6,
+    "titulo": "Repaso y cierre",
+    "tiempo": "5:13 – 5:42",
+    "enPantalla": "Resumen: “Quién · Qué · Cómo” y “Nunca comparta · Siempre verifique”. Código QR de la plataforma.",
+    "parrafos": [
+     "Repasemos. Un asistente de inteligencia artificial es un ayudante que escribe rápido, pero que puede equivocarse. Para pedirle bien las cosas, use la fórmula: quién, qué y cómo. Y recuerde las dos reglas: nunca comparta datos personales, siempre verifique.",
+     "Ahora viene lo mejor: vamos a practicar con lo que usted sabe hacer. Nos vemos en el siguiente video."
+    ]
+   }
+  ],
+  "meta": "Módulo: Módulo 1 · Responsable: Justo Geovanny Alcón Mendoza · Locución: 5:42 (683 palabras)"
+ },
+ {
+  "numero": 2,
+  "titulo": "Lo que usted sabe hacer, en el idioma del currículum",
+  "escenas": [
+   {
+    "numero": 1,
+    "titulo": "Apertura",
+    "tiempo": "0:00 – 0:44",
+    "enPantalla": "Título. Animación: una caja “Mi experiencia” se convierte en una hoja “Currículum”.",
+    "parrafos": [
+     "Bienvenido, bienvenida de nuevo.",
+     "Trabajar en el extranjero, o por cuenta propia, también es experiencia. Vender en un mercado, ayudar en una construcción, cocinar en un restaurante, cuidar a una persona mayor: todo eso es trabajo, y todo eso se aprende.",
+     "El problema es que muchas veces no sabemos contarlo de la manera en que un empleador lo entiende. Eso no es falta de experiencia; es falta de traducción. En este video vamos a aprender a traducir lo que usted sabe hacer al idioma de un currículum."
+    ]
+   },
+   {
+    "numero": 2,
+    "titulo": "Tres preguntas: el caso de Marvin",
+    "tiempo": "0:44 – 1:57",
+    "enPantalla": "Rótulo “Ejemplo ficticio”. Antes: “Trabajé en construcción”. Aparecen las tres preguntas con sus respuestas. Después: el puesto y las competencias.",
+    "parrafos": [
+     "Veamos un ejemplo inventado. Marvin trabajó cuatro años en construcción, y si le preguntan, responde: “Trabajé en construcción”. Es cierto, pero dice muy poco. Un empleador no puede saber qué sabe hacer Marvin.",
+     "Para traducirlo, hay tres preguntas que usted puede hacerse.",
+     "Primera: ¿qué hacía día a día? Marvin preparaba materiales, cargaba, cortaba y ayudaba a levantar paredes.",
+     "Segunda: ¿qué herramientas, máquinas o idiomas usaba? Marvin usaba herramientas eléctricas y hablaba inglés con su jefe para entender las indicaciones.",
+     "Tercera: ¿de qué era responsable? Marvin llegaba puntual todos los días, cuidaba el material y cumplía las normas de seguridad.",
+     "Ahora juntamos las respuestas. Marvin ya no dice “trabajé en construcción”. Dice: “Ayudante de albañilería, cuatro años. Preparación de materiales, uso de herramientas eléctricas, trabajo en equipo, cumplimiento de normas de seguridad e inglés básico”. Es el mismo trabajo, pero ahora se entiende lo que sabe hacer."
+    ]
+   },
+   {
+    "numero": 3,
+    "titulo": "Dos ejemplos más: Rosa y Doña Elena",
+    "tiempo": "1:57 – 2:54",
+    "enPantalla": "Rótulo “Ejemplo ficticio”. Dos tarjetas lado a lado, cada una con su “antes” y su “después”.",
+    "parrafos": [
+     "Veamos dos ejemplos más, también inventados.",
+     "Rosa trabajó en la cocina de un restaurante. Si solo dice “trabajé en un restaurante”, parece poco. Pero al hacerse las tres preguntas, descubre que preparaba alimentos, mantenía todo limpio y ordenado, y trabajaba con mucha presión en las horas de mayor demanda. Entonces su currículum dice: “Auxiliar de cocina: preparación de alimentos, orden y limpieza, y trabajo en horas de alta demanda”.",
+     "Doña Elena vendía en un puesto del mercado. Atendía clientes, manejaba dinero y sabía qué producto se estaba acabando. Eso se llama atención al cliente, manejo de efectivo y control de inventario. Es lo que ella hacía todos los días; solo le faltaba el nombre."
+    ]
+   },
+   {
+    "numero": 4,
+    "titulo": "Lo que muchas personas olvidan contar",
+    "tiempo": "2:54 – 3:26",
+    "enPantalla": "Lista que aparece punto por punto: adaptarse a un país nuevo, trabajar bajo presión, cumplir horarios, defenderse en otro idioma.",
+    "parrafos": [
+     "Hay cosas que muchas personas no cuentan porque creen que no valen. Adaptarse a un país nuevo, sin conocer a nadie. Trabajar bajo presión. Cumplir horarios estrictos. Defenderse en otro idioma. Aprender un oficio rápido, porque no había otra opción.",
+     "Todo eso vale, y muchos empleadores lo buscan. Pregúntese: ¿qué aprendí a hacer que al principio no sabía? Si usted lo hizo, puede escribirlo."
+    ]
+   },
+   {
+    "numero": 5,
+    "titulo": "Las partes de un currículum",
+    "tiempo": "3:26 – 4:15",
+    "enPantalla": "Plantilla de currículum con cinco bloques que se iluminan de uno en uno.",
+    "parrafos": [
+     "Ahora, ¿cómo se ordena un currículum? Tiene pocas partes.",
+     "Primero, los datos de contacto: su nombre, su número de teléfono y el municipio donde vive. No hace falta la dirección exacta.",
+     "Segundo, un perfil: dos o tres líneas que digan quién es usted y qué sabe hacer.",
+     "Tercero, la experiencia. Para cada trabajo, escriba el puesto, el lugar y el país, los años, y tres o cuatro frases sobre lo que hacía. Empiece por el más reciente.",
+     "Cuarto, sus habilidades y los idiomas que maneja.",
+     "Y quinto, su formación, aunque sea corta: un curso, un taller, la escuela."
+    ]
+   },
+   {
+    "numero": 6,
+    "titulo": "Dos cuidados y cierre",
+    "tiempo": "4:15 – 4:59",
+    "enPantalla": "Dos íconos: una lupa (“Solo lo que hizo”) y un candado (“Usted decide qué incluir”). Pantalla final con QR.",
+    "parrafos": [
+     "Antes de terminar, dos cuidados.",
+     "El primero es la honestidad. Cuente solo lo que de verdad hizo. No invente puestos y no cambie años. Un currículum honesto lo protege, porque en la entrevista le van a preguntar por lo que escribió.",
+     "El segundo es su decisión. Usted decide qué incluir. No tiene que escribir que es retornado, ni por qué regresó, ni poner su número de documento. Es su información, y es suya.",
+     "En el siguiente video veremos cómo el asistente le ayuda a armar todo esto. Hasta pronto."
+    ]
+   }
+  ],
+  "meta": "Módulo: Módulo 2 (parte formativa) · Responsable: Carlos Hugo Escobar Gómez · Locución: 4:59 (598 palabras)"
+ },
+ {
+  "numero": 3,
+  "titulo": "Demostración: el generador guiado paso a paso",
+  "escenas": [
+   {
+    "numero": 1,
+    "titulo": "Apertura y cómo entrar",
+    "tiempo": "0:00 – 0:46",
+    "enPantalla": "Pantalla de inicio del celular. Se escanea un código QR con la cámara y se abre la plataforma.",
+    "parrafos": [
+     "Bienvenido, bienvenida. En este video vamos a hacer, paso a paso, un currículum de ejemplo. Todo lo que verá escrito en la pantalla es inventado. Usted hará lo mismo desde su teléfono, y en el taller tendrá a alguien a su lado para ayudarle.",
+     "Para empezar, la plataforma se abre con un enlace o con un código QR. Con el código, abra la cámara de su teléfono, apúntela al código y toque el enlace que aparece. No hay que instalar nada, y no hay que crear una cuenta ni escribir su correo."
+    ]
+   },
+   {
+    "numero": 2,
+    "titulo": "Las tres preguntas",
+    "tiempo": "0:46 – 1:49",
+    "enPantalla": "Se escriben respuestas ficticias: “Ayudante de cocina”; “Trabajé cuatro años en un restaurante. Preparaba alimentos y mantenía la cocina limpia y ordenada”; “Un currículum de una página, con frases cortas”.",
+    "parrafos": [
+     "Al abrir, el generador le hace tres preguntas, con palabras sencillas.",
+     "La primera: ¿a qué tipo de trabajo quiere aplicar? Aquí escribimos: ayudante de cocina.",
+     "La segunda: ¿qué ha hecho usted? Cuéntelo con sus palabras, como si se lo explicara a un compañero. Aquí escribimos: trabajé cuatro años en un restaurante; preparaba alimentos y mantenía la cocina limpia y ordenada. No se preocupe por escribirlo bonito: el asistente se encarga de darle forma. Escriba lo que se acuerde, y si quiere agregar más, agregue.",
+     "La tercera: ¿cómo quiere recibir el resultado? Aquí escribimos: un currículum de una página, con frases cortas.",
+     "Fíjese que en ninguna de las tres preguntas se pide su nombre, su documento ni su dirección. No los necesita, y no los escriba."
+    ]
+   },
+   {
+    "numero": 3,
+    "titulo": "La instrucción armada",
+    "tiempo": "1:49 – 2:20",
+    "enPantalla": "Aparece la instrucción con tres colores. Flechas: QUIÉN, QUÉ, CÓMO. Botón grande “Copiar”.",
+    "parrafos": [
+     "Ahora mire la pantalla. El generador armó una instrucción con lo que usted respondió, y le muestra sus tres partes, cada una de un color: quién, qué y cómo.",
+     "Esto no es un adorno. Es para que usted vea de dónde salió cada parte. Así, más adelante, podrá armar sus propias instrucciones sin ayuda.",
+     "Ahora toque el botón grande que dice “Copiar”."
+    ]
+   },
+   {
+    "numero": 4,
+    "titulo": "La herramienta de IA",
+    "tiempo": "2:20 – 2:57",
+    "enPantalla": "Se abre la herramienta gratuita. Se pega la instrucción y se envía. Aviso en pantalla: “No escriba aquí datos personales”.",
+    "parrafos": [
+     "Ahora abrimos la herramienta gratuita de inteligencia artificial que usaremos en el taller. Toque el espacio para escribir, mantenga el dedo presionado y elija “Pegar”. Ahí aparece la instrucción completa. Toque enviar.",
+     "Una aclaración importante. La plataforma que acabamos de usar no guarda nada de lo que usted escribe. Pero esta herramienta es otra, y tiene sus propias reglas. Por eso, aquí tampoco se escriben datos personales delicados: ni documento, ni dirección, ni situación migratoria."
+    ]
+   },
+   {
+    "numero": 5,
+    "titulo": "Revisar y corregir",
+    "tiempo": "2:57 – 3:52",
+    "enPantalla": "Aparece el currículum. Se subrayan dos frases: una correcta y otra inventada (un idioma que la persona no habla). Se escribe “hazlo más corto”.",
+    "parrafos": [
+     "En unos segundos aparece el currículum. Y ahora viene lo más importante: revisar.",
+     "Lea con calma, frase por frase. Pregúntese: ¿esto es cierto? ¿Yo hice esto? Fíjese en este ejemplo: el asistente escribió que la persona habla francés, pero la persona no habla francés. Entonces se borra. El asistente a veces agrega cosas que suenan bien pero que no son ciertas, y usted es quien responde por lo que dice su currículum.",
+     "También puede pedir cambios. Si el texto le parece muy largo, escriba: “hazlo más corto”. Si hay palabras que no entiende, escriba: “usa palabras más sencillas”. Puede hacerlo las veces que quiera. Usted manda, y el asistente ayuda."
+    ]
+   },
+   {
+    "numero": 6,
+    "titulo": "Completar, guardar y cierre",
+    "tiempo": "3:52 – 4:37",
+    "enPantalla": "Se completan los espacios entre corchetes con teléfono y correo (ficticios). Se guarda el texto o el archivo en el teléfono. Pantalla final con QR.",
+    "parrafos": [
+     "Nos falta poco. Fíjese que en el currículum quedaron unos espacios entre corchetes: ahí van su teléfono y su correo. Escríbalos usted mismo aquí, en el documento, y no en la conversación con el asistente.",
+     "Por último, guarde el currículum en su teléfono. Puede copiar el texto en la aplicación de notas o guardarlo como archivo, y así lo tendrá aunque no tenga internet. Si tiene dudas, en el taller le ayudaremos.",
+     "Y listo: un currículum hecho por usted, con ayuda de una herramienta. Ahora le toca practicar. Hasta pronto."
+    ]
+   }
+  ],
+  "meta": "Módulo: Módulo 2 (generador guiado) · Responsable: Héctor Jordin Adolfo García Coyoy · Locución: 4:37 (554 palabras)"
+ },
+ {
+  "numero": 4,
+  "titulo": "La misma fórmula sirve para más cosas",
+  "escenas": [
+   {
+    "numero": 1,
+    "titulo": "Apertura",
+    "tiempo": "0:00 – 0:37",
+    "enPantalla": "Título. Tarjeta de la fórmula: los tres bloques se van apagando hasta que solo quedan los títulos Quién, Qué y Cómo.",
+    "parrafos": [
+     "Bienvenido, bienvenida. Ya conoce la fórmula: quién, qué y cómo. Y ya la usó para hacer su currículum. La buena noticia es que esa misma fórmula sirve para muchas otras cosas.",
+     "En este video veremos tres: prepararse para una entrevista, entender un documento y escribir un mensaje formal.",
+     "Y hay algo distinto. Esta vez casi no le vamos a repetir la fórmula; solo se la recordamos en una tarjeta. Vea cuánto se acuerda usted."
+    ]
+   },
+   {
+    "numero": 2,
+    "titulo": "Primera situación: prepararse para una entrevista",
+    "tiempo": "0:37 – 1:59",
+    "enPantalla": "Ícono de entrevista. La instrucción aparece con sus tres partes resaltadas. Capturas ficticias de una pregunta del asistente y una respuesta escrita.",
+    "parrafos": [
+     "Primera situación: prepararse para una entrevista de trabajo. Muchas personas se ponen nerviosas porque no saben qué les van a preguntar. El asistente puede hacer de entrevistador para que usted practique.",
+     "Piense en las tres partes. Quién: una persona que entrevista para el puesto que usted busca. Qué: que usted quiere practicar sus respuestas, y que le haga una pregunta a la vez y espere su respuesta. Cómo: que después le diga cómo mejorarla, con frases cortas.",
+     "La instrucción completa quedaría así: “Actúa como una persona que entrevista para puestos de ayudante de cocina. Voy a practicar mis respuestas. Hazme una pregunta a la vez, espera mi respuesta y luego dime cómo mejorarla, con frases cortas”.",
+     "Así puede practicar en su casa, las veces que quiera, antes de la entrevista de verdad. Y si las preguntas no se parecen a las que le hagan después, no se preocupe: lo que se practica es la soltura para hablar de lo que usted sabe hacer."
+    ]
+   },
+   {
+    "numero": 3,
+    "titulo": "Segunda situación: entender un documento",
+    "tiempo": "1:59 – 3:13",
+    "enPantalla": "Ícono de documento. La instrucción resaltada. Aviso en pantalla: “Antes de pegar, borre nombres, números y direcciones”.",
+    "parrafos": [
+     "Segunda situación: entender un documento. Por ejemplo, una oferta de trabajo con palabras que usted no conoce.",
+     "Le decimos al asistente quién: alguien que explica textos difíciles con palabras sencillas. Qué: que le explique cada parte del texto y que le sugiera preguntas para hacerle al empleador. Cómo: en una lista corta.",
+     "Antes de pegar el texto, un cuidado. Revíselo y borre nombres, números de teléfono, direcciones y cualquier dato personal, suyo o de otras personas.",
+     "Y ahora, la advertencia más importante de este video. Si el documento es un contrato, un trámite o algo sobre derechos laborales, el asistente le puede ayudar a entender qué significa una palabra, pero no puede decirle qué debe hacer, cuánto tiempo tiene ni qué le corresponde. En eso se puede equivocar. Esa información se confirma en la institución que corresponde. El asistente no sustituye a un abogado ni a una oficina oficial."
+    ]
+   },
+   {
+    "numero": 4,
+    "titulo": "Tercera situación: un mensaje formal",
+    "tiempo": "3:13 – 4:06",
+    "enPantalla": "Ícono de WhatsApp. La instrucción resaltada. El mensaje generado (ficticio) y una mano que lo edita antes de enviarlo.",
+    "parrafos": [
+     "Tercera situación: escribir un mensaje formal. Por ejemplo, un mensaje a una empresa para preguntar por una vacante.",
+     "Quién: alguien que redacta mensajes respetuosos. Qué: que usted necesita preguntar por una vacante de ayudante de cocina. Cómo: para WhatsApp, en cinco líneas y con tono cordial.",
+     "El asistente le entrega el mensaje. Ahora léalo. ¿Suena como usted? Si algo no le suena natural, cámbielo. Si dice algo que usted no quiere decir, bórrelo. Agregue usted mismo su nombre y su teléfono al final, y cuando esté listo, envíelo.",
+     "Recuerde: usted es quien firma el mensaje. El asistente solo le ahorró el trabajo de empezar desde cero."
+    ]
+   },
+   {
+    "numero": 5,
+    "titulo": "Repaso y cierre",
+    "tiempo": "4:06 – 4:31",
+    "enPantalla": "Resumen: “Quién · Qué · Cómo” y “Nunca comparta · Siempre verifique”. QR.",
+    "parrafos": [
+     "Veamos lo que aprendimos. La fórmula es la misma para todo: quién, qué y cómo. Lo único que cambia es lo que usted necesita. Y las dos reglas también son las mismas: nunca comparta datos personales y siempre verifique.",
+     "En el siguiente video le toca elegir a usted. Hasta pronto."
+    ]
+   }
+  ],
+  "meta": "Módulo: Módulo 3 · Responsable: Henry Daniel Díaz Corado · Locución: 4:31 (542 palabras)"
+ },
+ {
+  "numero": 5,
+  "titulo": "Ahora le toca a usted",
+  "escenas": [
+   {
+    "numero": 1,
+    "titulo": "Apertura",
+    "tiempo": "0:00 – 0:32",
+    "enPantalla": "Título “Ahora le toca a usted”. Pantalla sin fórmula ni ejemplos.",
+    "parrafos": [
+     "Bienvenido, bienvenida. Hasta ahora lo acompañamos paso a paso: primero le dimos la fórmula, después la practicamos con el currículum y luego con otras situaciones. Ahora le toca a usted.",
+     "Lo que sigue es usar lo que aprendió para algo que usted necesite, algo que en este curso no le enseñamos. Nadie le va a dar la instrucción hecha. La va a armar usted."
+    ]
+   },
+   {
+    "numero": 2,
+    "titulo": "Pensar una necesidad propia",
+    "tiempo": "0:32 – 1:06",
+    "enPantalla": "Tres preguntas aparecen una debajo de otra: ¿Qué me cuesta escribir o entender? ¿Qué me gustaría preparar? ¿Qué tarea me toma mucho tiempo?",
+    "parrafos": [
+     "Primero, piense. Tómese un momento; puede pausar este video.",
+     "¿Qué es algo que le cuesta escribir o entender? ¿Qué le gustaría preparar? ¿Qué tarea le quita mucho tiempo?",
+     "Puede ser cualquier cosa: un mensaje para un familiar, una carta, una lista de tareas para un negocio, el significado de una palabra, una idea para vender algo. No hay necesidades grandes ni pequeñas. Elija una que sea suya."
+    ]
+   },
+   {
+    "numero": 3,
+    "titulo": "Hacerlo en cuatro pasos",
+    "tiempo": "1:06 – 1:58",
+    "enPantalla": "Cuatro pasos numerados: 1 Elija, 2 Escriba su instrucción, 3 Revise, 4 Verifique.",
+    "parrafos": [
+     "Ahora, hágalo en cuatro pasos.",
+     "Uno: escriba su instrucción con las tres partes: quién, qué y cómo. Si se le olvida cómo era, puede mirar la tarjeta de la fórmula.",
+     "Dos: envíela.",
+     "Tres: lea la respuesta con calma y ajústela. Pida cambios, como “hazlo más corto” o “usa palabras más sencillas”.",
+     "Cuatro: si lo que le respondió es importante, verifíquelo. Y recuerde no compartir datos personales delicados.",
+     "Si no le sale a la primera, no pasa nada. Cambie una sola parte de la instrucción y pruebe otra vez. A todos nos pasa. Y si se atora, levante la mano: el facilitador está aquí para ayudarle."
+    ]
+   },
+   {
+    "numero": 4,
+    "titulo": "Lo que ofrece este taller y lo que no",
+    "tiempo": "1:58 – 2:57",
+    "enPantalla": "Dos columnas. Ofrece: una herramienta para usar por su cuenta, materiales para guardar, constancia de participación. No ofrece: empleo, trámites, asesoría legal.",
+    "parrafos": [
+     "Antes de terminar, queremos ser claros sobre lo que este taller es y lo que no es.",
+     "Este taller le enseñó a usar una herramienta y le acompañó a hacer su currículum. No gestiona empleo, no contacta empleadores, no hace trámites migratorios y no da asesoría legal. Tener un buen currículum ayuda, pero no garantiza un trabajo, y sería injusto prometerle lo contrario.",
+     "La constancia que va a recibir es de participación. No es una certificación oficial de competencias laborales.",
+     "Su participación fue voluntaria. No vamos a guardar ni a pedir su currículum, ni lo que usted escribió en la herramienta: eso es suyo. Lo único que contamos, sin nombres, es cuántas personas lograron armar su propia instrucción."
+    ]
+   },
+   {
+    "numero": 5,
+    "titulo": "Despedida",
+    "tiempo": "2:57 – 3:28",
+    "enPantalla": "Materiales: tarjeta de la fórmula, guía de bolsillo, banco de ejemplos. QR de la plataforma. Texto: “Compártalo con quien lo necesite”.",
+    "parrafos": [
+     "Lo que sí le queda es una herramienta que puede usar cuando quiera, sus materiales para guardar y consultar, y una plataforma que seguirá disponible. Comparta el enlace con su familia y con quien lo necesite.",
+     "Queremos agradecerle. Usted ya sabía mucho, y hoy sumó una herramienta más. Gracias por su tiempo y por todo lo que aportó a este taller."
+    ]
+   }
+  ],
+  "meta": "Módulo: Módulo 4 y cierre · Responsable: Henry Daniel Díaz Corado · Locución: 3:28 (415 palabras)"
+ }
+]

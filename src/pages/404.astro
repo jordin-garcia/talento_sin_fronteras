@@ -1,0 +1,20 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import { img } from '../data/imagenes';
+import { url } from '../scripts/ruta';
+---
+
+<Base titulo="Página no encontrada">
+  <section class="nf contenedor">
+    <Image src={img('balam-senala')} alt="" width={220} class="flotar" />
+    <h1>¡Ups! Este camino no existe</h1>
+    <p>Volvamos al mapa para seguir aprendiendo.</p>
+    <a class="boton" href={url('/')}>Volver al inicio ›</a>
+  </section>
+</Base>
+
+<style>
+  .nf { min-height: 80vh; display: grid; place-content: center; justify-items: center; text-align: center; gap: 10px; padding-top: 80px; }
+  .nf :global(img) { width: 170px; }
+</style>

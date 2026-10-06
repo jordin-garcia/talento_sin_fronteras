@@ -1,0 +1,68 @@
+---
+import { Image } from 'astro:assets';
+import { NIVELES } from '../data/sitio';
+import { img, ICONO_NIVEL } from '../data/imagenes';
+import { url } from '../scripts/ruta';
+---
+
+<section id="mapa" class="seccion mapa-seccion" aria-labelledby="mapa-titulo">
+  <div class="contenedor">
+    <div class="mapa" data-revelar>
+      <div class="pliegues" aria-hidden="true"></div>
+      <h2 id="mapa-titulo">Su mapa del camino</h2>
+      <p class="sub">Ha completado <b data-progreso-cuenta>0</b> de 5 niveles</p>
+      <ol class="hitos">
+        {NIVELES.map((n) => (
+          <li data-nivel={n.n} style={`--brillo:${n.brillo}`}>
+            <a href={url(n.slug)}>
+              <span class="pin" aria-hidden="true"><svg viewBox="0 0 24 32" width="22" height="30"><path d="M12 0C5.4 0 0 5.2 0 11.7 0 20.4 12 32 12 32s12-11.6 12-20.3C24 5.2 18.6 0 12 0z" fill="#ffbf3c"/><circle cx="12" cy="11.5" r="4.6" fill="#7a3f00"/></svg></span>
+              <span class="medalla"><Image src={img(ICONO_NIVEL[n.n])} alt="" width={64} /></span>
+              <span class="nombre">{n.hito}</span>
+              <span class="estado"><span class="e-hecho">Completado</span><span class="e-aqui">Usted está aquí</span></span>
+            </a>
+          </li>
+        ))}
+      </ol>
+      <div class="barra-mapa" aria-hidden="true"><i data-progreso-barra></i></div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .mapa {
+    position: relative; text-align: center; overflow: hidden;
+    padding: clamp(24px, 6vw, 44px) clamp(12px, 4vw, 40px) clamp(26px, 6vw, 40px);
+    border-radius: 26px;
+    background:
+      radial-gradient(circle at 20% 10%, rgba(176, 107, 255, 0.25), transparent 50%),
+      radial-gradient(circle at 90% 90%, rgba(34, 195, 208, 0.22), transparent 50%),
+      linear-gradient(160deg, #26318a, #18206a 60%, #121856);
+    border: 2px solid rgba(160, 175, 255, 0.35);
+    box-shadow: 0 30px 60px -25px rgba(0,0,0,.8), inset 0 0 60px rgba(0,0,0,.35);
+    transform: perspective(900px) rotateX(6deg);
+  }
+  .pliegues { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(90deg, transparent 32%, rgba(0,0,0,.18) 33%, transparent 34%, transparent 66%, rgba(0,0,0,.18) 67%, transparent 68%); }
+  h2 { font-size: clamp(1.5rem, 6vw, 2.2rem); }
+  .sub { color: var(--texto-suave); }
+  .sub b { color: var(--como); }
+  .hitos { list-style: none; padding: 0; margin: 18px 0 0; display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; position: relative; }
+  .hitos::before { content: ''; position: absolute; top: 58px; left: 10%; right: 10%; border-top: 3px dashed rgba(255,255,255,.3); }
+  .hitos a { position: relative; display: flex; flex-direction: column; align-items: center; gap: 6px; text-decoration: none; padding-top: 28px; }
+  .medalla {
+    position: relative; width: clamp(50px, 14vw, 72px); aspect-ratio: 1; border-radius: 50%; display: grid; place-items: center;
+    background: radial-gradient(circle, color-mix(in srgb, var(--brillo) 55%, #1a1f66), #141a55 75%);
+    border: 3px solid color-mix(in srgb, var(--brillo) 80%, white); box-shadow: 0 0 18px color-mix(in srgb, var(--brillo) 55%, transparent);
+  }
+  .medalla :global(img) { width: 72%; }
+  .nombre { font-family: var(--fuente-titulo); font-weight: 800; font-size: clamp(0.78rem, 3.2vw, 1.05rem); line-height: 1.1; color: color-mix(in srgb, var(--brillo) 45%, white); }
+  .estado { font-size: clamp(0.68rem, 2.6vw, 0.85rem); font-weight: 800; min-height: 1.2em; }
+  .e-hecho, .e-aqui { display: none; }
+  .hecho .e-hecho { display: inline; color: var(--verifique); }
+  .actual .e-aqui { display: inline; color: var(--como); }
+  .pin { position: absolute; top: -6px; line-height: 0; opacity: 0; filter: drop-shadow(0 4px 6px rgba(0,0,0,.6)); }
+  .actual .pin { opacity: 1; animation: saltar 1.2s ease-in-out infinite; }
+  @keyframes saltar { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+  .hecho .medalla::after { content: '✔'; position: absolute; right: -4px; bottom: -4px; width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; font-size: 0.8rem; font-weight: 900; background: var(--verifique); color: #04331c; }
+  .barra-mapa { margin: 22px auto 0; width: min(420px, 90%); height: 12px; border-radius: 99px; background: rgba(0,0,0,.3); overflow: hidden; }
+  .barra-mapa i { display: block; height: 100%; width: calc(var(--avance, 0) * 100%); background: linear-gradient(90deg, var(--quien), var(--que), var(--como)); transition: width 0.8s; }
+</style>

@@ -1,0 +1,38 @@
+---
+// Versión en texto del video, escena por escena, idéntica al guion aprobado (R-2.4).
+import guiones from '../data/guiones.json';
+const { video } = Astro.props as { video: number };
+const g = guiones.find((x) => x.numero === video)!;
+---
+
+<div class="texto-video">
+  <p class="intro">Video {g.numero}: <b>{g.titulo}</b>. Toque cada escena para leerla.</p>
+  {g.escenas.map((e, i) => (
+    <details open={i === 0}>
+      <summary>
+        <span class="n">{e.numero}</span>
+        <span class="t">{e.titulo}</span>
+        <span class="tiempo">{e.tiempo}</span>
+      </summary>
+      <div class="cuerpo">
+        {e.parrafos.map((p) => <p>{p}</p>)}
+      </div>
+    </details>
+  ))}
+</div>
+
+<style>
+  .texto-video { display: grid; gap: 10px; }
+  .intro { color: var(--texto-suave); margin: 0 0 4px; }
+  details { border-radius: 18px; background: var(--vidrio); border: 1px solid var(--borde); overflow: hidden; }
+  details[open] { border-color: color-mix(in srgb, var(--brillo, #7a5cff) 50%, transparent); }
+  summary { list-style: none; cursor: pointer; display: flex; align-items: center; gap: 12px; padding: 14px 16px; min-height: 56px; font-weight: 800; }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: '+'; margin-left: auto; font-size: 1.5rem; line-height: 1; color: var(--brillo, var(--como)); transition: transform .2s; }
+  details[open] summary::after { transform: rotate(45deg); }
+  .n { flex: none; width: 32px; height: 32px; border-radius: 10px; display: grid; place-items: center; background: rgba(255,255,255,.1); font-family: var(--fuente-titulo); }
+  .t { font-family: var(--fuente-titulo); font-size: 1.12rem; line-height: 1.2; }
+  .tiempo { font-size: 0.8rem; color: var(--texto-suave); font-weight: 700; white-space: nowrap; }
+  .cuerpo { padding: 0 18px 8px; font-size: 1.06rem; line-height: 1.7; }
+  @media (max-width: 420px) { .tiempo { display: none; } }
+</style>

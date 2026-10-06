@@ -1,0 +1,37 @@
+---
+import { SITIO } from '../data/sitio';
+import { url } from '../scripts/ruta';
+---
+
+<footer class="pie">
+  <div class="contenedor pie-interior">
+    <div class="pie-marca">
+      <img src={url('/logo.svg')} alt="" width="56" height="56" />
+      <div>
+        <strong>{SITIO.nombre}</strong>
+        <span>Ruta de aprendizaje gratuita · Inteligencia artificial para su vida laboral</span>
+      </div>
+    </div>
+    <nav class="pie-enlaces" aria-label="Enlaces">
+      <a href={url('/')}>Inicio</a>
+      <a href={url('/morral')}>Materiales</a>
+      <a href={url('/banco')}>Banco de ejemplos</a>
+      <a href={url('/reconocimiento')}>Reconocimiento</a>
+    </nav>
+    <p class="privacidad">🔒 Este sitio no pide registro y no guarda ni envía ningún dato suyo. Solo su teléfono recuerda qué niveles completó.</p>
+    <p class="derechos">© {new Date().getFullYear()} {SITIO.nombre}. Ilustraciones originales creadas para este proyecto.</p>
+  </div>
+</footer>
+
+<style>
+  .pie { position: relative; padding: 48px 0 calc(32px + env(safe-area-inset-bottom)); background: linear-gradient(180deg, transparent, rgba(5, 6, 24, 0.9) 30%); border-top: 1px solid rgba(255, 255, 255, 0.06); }
+  .pie-interior { display: grid; gap: 22px; }
+  .pie-marca { display: flex; gap: 14px; align-items: center; }
+  .pie-marca strong { display: block; font-family: var(--fuente-titulo); font-size: 1.3rem; }
+  .pie-marca span { color: var(--texto-suave); font-size: 0.95rem; }
+  .pie-enlaces { display: flex; flex-wrap: wrap; gap: 6px 20px; }
+  .pie-enlaces a { color: var(--texto-suave); font-weight: 700; text-decoration: none; min-height: 44px; display: inline-flex; align-items: center; }
+  .pie-enlaces a:hover { color: var(--como); }
+  .privacidad { margin: 0; padding: 14px 16px; border-radius: 16px; background: rgba(58, 208, 138, 0.1); border: 1px solid rgba(58, 208, 138, 0.3); font-weight: 600; }
+  .derechos { margin: 0; color: #8d8ab8; font-size: 0.88rem; }
+</style>

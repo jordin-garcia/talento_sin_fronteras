@@ -1,0 +1,162 @@
+---
+// Nivel 2 · Módulo 2 (parte formativa) · Apoyo parcial (R-4.x)
+import { Image } from 'astro:assets';
+import Nivel from '../../layouts/Nivel.astro';
+import { img } from '../../data/imagenes';
+
+const preguntas = [
+  { c: 'p-quien', t: '¿Qué hacía día a día?', e: 'Preparaba materiales, cargaba, cortaba, atendía clientes…' },
+  { c: 'p-que', t: '¿Qué herramientas, máquinas o idiomas usaba?', e: 'Herramientas eléctricas, caja registradora, inglés…' },
+  { c: 'p-como', t: '¿De qué era responsable?', e: 'Llegar puntual, cuidar el material, cumplir normas de seguridad…' },
+];
+const casos = [
+  { nombre: 'Marvin', icono: 'ico-herramientas', antes: '«Trabajé en construcción».', despues: 'Ayudante de albañilería, cuatro años. Preparación de materiales, uso de herramientas eléctricas, trabajo en equipo, cumplimiento de normas de seguridad e inglés básico.' },
+  { nombre: 'Rosa', icono: 'ico-olla', antes: '«Trabajé en un restaurante».', despues: 'Auxiliar de cocina: preparación de alimentos, orden y limpieza, y trabajo en horas de alta demanda.' },
+  { nombre: 'Doña Elena', icono: 'ico-canasta', antes: '«Vendía en el mercado».', despues: 'Atención al cliente, manejo de efectivo y control de inventario. Es lo que hacía todos los días; solo le faltaba el nombre.' },
+];
+const olvidan = ['Adaptarse a un país nuevo', 'Trabajar bajo presión', 'Cumplir horarios estrictos', 'Defenderse en otro idioma', 'Aprender un oficio rápido'];
+const partes = [
+  { t: 'Datos de contacto', d: 'Su nombre, su número de teléfono y el municipio donde vive. No hace falta la dirección exacta.' },
+  { t: 'Perfil', d: 'Dos o tres líneas que digan quién es usted y qué sabe hacer.' },
+  { t: 'Experiencia', d: 'Para cada trabajo: puesto, lugar y país, años, y tres o cuatro frases sobre lo que hacía. Empiece por el más reciente.' },
+  { t: 'Habilidades e idiomas', d: 'Lo que sabe hacer y los idiomas que maneja.' },
+  { t: 'Formación', d: 'Aunque sea corta: un curso, un taller, la escuela.' },
+];
+---
+
+<Nivel n={2} poseGuia="senala" saludo="¡Hola! Soy Balam. Vender en un mercado, ayudar en una construcción, cocinar, cuidar a una persona mayor: todo eso es trabajo. No le falta experiencia; le falta traducirla.">
+  <div class="actividad">
+    <article class="tarjeta" data-revelar>
+      <span class="sobretitulo">La traducción</span>
+      <h3>Tres preguntas para traducir su experiencia</h3>
+      <p>Hágase estas tres preguntas sobre cada trabajo que tuvo:</p>
+      <ol class="tres">
+        {preguntas.map((p, i) => (
+          <li class:list={['parte', p.c]}>
+            <span class="paso-num">{i + 1}</span>
+            <div><b>{p.t}</b><span class="ej">{p.e}</span></div>
+          </li>
+        ))}
+      </ol>
+    </article>
+
+    <div data-revelar>
+      <h3 class="centro">Antes y después <span class="etiqueta-ficticio">Ejemplos ficticios</span></h3>
+      <p class="centro suave">Toque cada tarjeta para voltearla.</p>
+      <div class="grid-3">
+        {casos.map((c) => (
+          <button type="button" class="voltear" aria-pressed="false" aria-label={`Caso de ${c.nombre}: toque para ver el después`}>
+            <span class="cara frente">
+              <Image src={img(c.icono)} alt="" width={110} class="flotar" />
+              <span class="quien">{c.nombre}</span>
+              <span class="lbl">ANTES</span>
+              <span class="txt">{c.antes}</span>
+              <span class="toque">Toque para traducir ↻</span>
+            </span>
+            <span class="cara reverso">
+              <span class="quien">{c.nombre}</span>
+              <span class="lbl ok">DESPUÉS</span>
+              <span class="txt">{c.despues}</span>
+              <span class="toque">Es el mismo trabajo, pero ahora se entiende ✔</span>
+            </span>
+          </button>
+        ))}
+      </div>
+    </div>
+
+    <article class="tarjeta" data-revelar>
+      <h3>Lo que muchas personas olvidan contar</h3>
+      <p>Hay cosas que no se cuentan porque se cree que no valen. <b>Todo eso vale</b>, y muchos empleadores lo buscan:</p>
+      <ul class="olvidan">{olvidan.map((o) => <li>⭐ {o}</li>)}</ul>
+      <p class="pregunta-clave">Pregúntese: <b>¿qué aprendí a hacer que al principio no sabía?</b> Si usted lo hizo, puede escribirlo.</p>
+    </article>
+
+    <article class="tarjeta" data-revelar>
+      <h3 class="act-titulo"><Image src={img('ico-curriculum')} alt="" width={96} /> Las partes de un currículum</h3>
+      <ol class="cv">
+        {partes.map((p, i) => (
+          <li style={`--i:${i}`}><span class="paso-num">{i + 1}</span><div><b>{p.t}</b><p>{p.d}</p></div></li>
+        ))}
+      </ol>
+    </article>
+
+    <div class="grid-2" data-revelar>
+      <article class="tarjeta cuidado">
+        <Image src={img('ico-lupa')} alt="" width={80} class="mini" />
+        <h3>Solo lo que hizo</h3>
+        <p>Cuente solo lo que de verdad hizo. No invente puestos y no cambie años. Un currículum honesto lo protege, porque en la entrevista le van a preguntar por lo que escribió.</p>
+      </article>
+      <article class="tarjeta cuidado">
+        <Image src={img('ico-candado')} alt="" width={80} class="mini" />
+        <h3>Usted decide qué incluir</h3>
+        <p>No tiene que escribir que es retornado, ni por qué regresó, ni poner su número de documento. Es su información, y es suya.</p>
+      </article>
+    </div>
+
+    <article class="tarjeta borrador" data-revelar>
+      <span class="sobretitulo">Practique · plantilla</span>
+      <h3>Su borrador privado</h3>
+      <p>Piense en su último trabajo y complete los espacios. <b>Esto no se guarda ni se envía</b>: si cierra la página, se borra. Úselo para ordenar sus ideas antes del Nivel 3.</p>
+      <div class="campos">
+        <div class="campo p-quien"><label for="b1">1. ¿Qué hacía día a día?</label><textarea id="b1" rows="3" data-revisar></textarea></div>
+        <div class="campo p-que"><label for="b2">2. ¿Qué herramientas, máquinas o idiomas usaba?</label><textarea id="b2" rows="3" data-revisar></textarea></div>
+        <div class="campo p-como"><label for="b3">3. ¿De qué era responsable?</label><textarea id="b3" rows="3" data-revisar></textarea></div>
+      </div>
+      <p class="alerta" data-alerta hidden></p>
+      <p class="suave">En el siguiente nivel, el generador le ayudará a convertir esto en una instrucción para la herramienta de IA.</p>
+    </article>
+  </div>
+</Nivel>
+
+<style>
+  .centro { text-align: center; display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; align-items: center; }
+  .suave { color: var(--texto-suave); }
+  p.centro { margin-top: -4px; }
+  .tres { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+  .tres li { display: flex; gap: 12px; align-items: center; }
+  .tres b { display: block; font-size: 1.08rem; }
+  .ej { font-size: .92rem; color: var(--texto-suave); }
+
+  .voltear { all: unset; box-sizing: border-box; cursor: pointer; display: grid; perspective: 1000px; min-height: 300px; }
+  .voltear:focus-visible { outline: 3px solid var(--oro); outline-offset: 4px; border-radius: 22px; }
+  .cara {
+    grid-area: 1 / 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; text-align: center;
+    padding: 20px 16px; border-radius: 22px; backface-visibility: hidden; -webkit-backface-visibility: hidden;
+    transition: transform .7s cubic-bezier(.3,1.3,.5,1);
+  }
+  .frente { background: linear-gradient(160deg, #2d3290, #1a1e5c); border: 2px solid rgba(255,255,255,.2); }
+  .reverso { transform: rotateY(180deg); background: linear-gradient(160deg, #1b7a5a, #13416b); border: 2px solid var(--verifique); }
+  .voltear[aria-pressed="true"] .frente { transform: rotateY(-180deg); }
+  .voltear[aria-pressed="true"] .reverso { transform: rotateY(0); }
+  .frente :global(img) { width: 96px; }
+  .quien { font-family: var(--fuente-titulo); font-weight: 800; font-size: 1.4rem; }
+  .lbl { font-size: .78rem; font-weight: 900; letter-spacing: .12em; padding: 2px 10px; border-radius: 6px; background: rgba(255,93,115,.25); }
+  .lbl.ok { background: rgba(58,208,138,.35); }
+  .txt { font-weight: 700; font-size: 1.04rem; line-height: 1.45; }
+  .toque { font-size: .85rem; color: var(--como); font-weight: 800; }
+
+  .olvidan { list-style: none; padding: 0; margin: 0 0 12px; display: flex; flex-wrap: wrap; gap: 8px; }
+  .olvidan li { padding: .4em .9em; border-radius: 999px; font-weight: 800; background: rgba(255, 191, 60, .14); border: 1px solid rgba(255, 191, 60, .5); }
+  .pregunta-clave { margin: 0; }
+  .cv { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+  .cv li { display: flex; gap: 12px; padding: 12px; border-radius: 16px; background: rgba(255,255,255,.05); border: 1px solid var(--borde); animation: brillar 6s ease-in-out infinite; animation-delay: calc(var(--i) * 1.2s); }
+  @keyframes brillar { 0%, 30%, 100% { background: rgba(255,255,255,.05); } 10% { background: rgba(34, 195, 208, .22); border-color: var(--que); } }
+  .cv p { margin: 2px 0 0; color: var(--texto-suave); font-size: .98rem; }
+  .cuidado :global(.mini) { width: 64px; float: right; margin-left: 8px; }
+  .campos { display: grid; gap: 14px; margin-bottom: 12px; }
+</style>
+
+<script>
+  import { datoPersonal } from '../../scripts/utilidades';
+  document.querySelectorAll<HTMLButtonElement>('.voltear').forEach((b) =>
+    b.addEventListener('click', () => b.setAttribute('aria-pressed', String(b.getAttribute('aria-pressed') !== 'true')))
+  );
+  const alerta = document.querySelector<HTMLElement>('[data-alerta]')!;
+  document.querySelectorAll<HTMLTextAreaElement>('[data-revisar]').forEach((t) =>
+    t.addEventListener('input', () => {
+      const d = [...document.querySelectorAll<HTMLTextAreaElement>('[data-revisar]')].map((x) => datoPersonal(x.value)).find(Boolean);
+      alerta.hidden = !d;
+      if (d) alerta.textContent = `⚠ Parece que escribió ${d}. Bórrelo: no hace falta para su currículum.`;
+    })
+  );
+</script>

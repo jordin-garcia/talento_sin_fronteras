@@ -1,0 +1,83 @@
+---
+// Nivel final: Morral de herramientas (R-8.1).
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Reglas from '../components/Reglas.astro';
+import { img } from '../data/imagenes';
+import { url } from '../scripts/ruta';
+
+const materiales = [
+  { id: 'tarjeta', icono: 'ico-estrella', titulo: 'Tarjeta de la fórmula', texto: 'Una imagen para guardar en la galería de su teléfono, con las tres partes de la fórmula y las dos reglas.', href: url('/materiales/tarjeta-de-la-formula.png'), boton: 'Descargar imagen', descarga: true, color: '#ffbf3c' },
+  { id: 'guia', icono: 'ico-curriculum', titulo: 'Guía de bolsillo', texto: 'Tres páginas con la fórmula, un ejemplo para cada tarea y la lista de lo que nunca se comparte.', href: url('/materiales/guia-de-bolsillo.pdf'), boton: 'Descargar PDF', descarga: true, color: '#22c3d0' },
+  { id: 'banco', icono: 'ico-caminos', titulo: 'Banco de ejemplos', texto: 'Diez casos resueltos, con la fórmula desglosada en colores, para reconocer el patrón.', href: url('/banco'), boton: 'Ver ejemplos', descarga: false, color: '#b06bff' },
+  { id: 'plantilla', icono: 'ico-herramientas', titulo: 'Plantilla de currículum', texto: 'Un archivo de texto con las cinco partes del currículum, para completarlo a mano.', href: url('/materiales/plantilla-curriculum.txt'), boton: 'Descargar plantilla', descarga: true, color: '#3ad08a' },
+  { id: 'reconocimiento', icono: 'ico-estrella', titulo: 'Su reconocimiento', texto: 'Escriba su nombre y descargue su reconocimiento de participación. Su nombre no sale de su teléfono.', href: url('/reconocimiento'), boton: 'Crear mi reconocimiento', descarga: false, color: '#ff4fa3' },
+  { id: 'facilitador', icono: 'ico-asistente', titulo: 'Guía del facilitador', texto: 'Para organizaciones, parroquias u oficinas que quieran dar este taller sin ayuda del equipo autor.', href: url('/materiales/guia-del-facilitador.pdf'), boton: 'Descargar PDF', descarga: true, color: '#ff9a3c' },
+];
+---
+
+<Base titulo="Su morral de herramientas" descripcion="Materiales para guardar en su teléfono: tarjeta de la fórmula, guía de bolsillo, banco de ejemplos, plantilla de currículum y reconocimiento.">
+  <section class="morral">
+    <div class="contenedor cab">
+      <div class="arte" aria-hidden="true">
+        <span class="halo"></span>
+        <Image src={img('diorama-morral')} alt="" widths={[320, 520]} sizes="(min-width: 900px) 420px, 74vw" class="flotar" loading="eager" />
+        <Image src={img('ixchel-celebra')} alt="" width={200} class="g g1" />
+        <Image src={img('balam-celebra')} alt="" width={200} class="g g2" />
+      </div>
+      <div class="texto">
+        <span class="sobretitulo">Nivel final</span>
+        <h1>Su morral de herramientas</h1>
+        <p>Todo lo que necesita para seguir usando la fórmula cuando quiera. <b>Guarde estos archivos en su teléfono</b>: los puede ver aunque no tenga internet.</p>
+        <p class="progreso">Lleva <b data-progreso-cuenta>0</b> de 5 niveles completados.</p>
+      </div>
+    </div>
+
+    <div class="contenedor">
+      <ul class="materiales">
+        {materiales.map((m) => (
+          <li id={m.id} class="material" style={`--c:${m.color}`} data-revelar>
+            <Image src={img(m.icono)} alt="" width={120} class="ico flotar" />
+            <h2>{m.titulo}</h2>
+            <p>{m.texto}</p>
+            <a class="boton chico" href={m.href} download={m.descarga ? '' : undefined}>{m.boton} ›</a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+  <Reglas />
+</Base>
+
+<script>
+  import { revelar } from '../scripts/animaciones-nivel';
+  revelar();
+</script>
+
+<style>
+  .morral { padding-top: 84px; }
+  .cab { display: grid; gap: 10px; align-items: center; margin-bottom: 28px; }
+  @media (min-width: 860px) { .cab { grid-template-columns: 1fr 1fr; } }
+  .arte { position: relative; width: min(74vw, 420px); margin: 0 auto; }
+  .halo { position: absolute; inset: 6%; border-radius: 50%; background: radial-gradient(circle, rgba(255, 201, 74, .7), transparent 70%); filter: blur(20px); }
+  .arte :global(img.flotar) { position: relative; width: 100%; filter: drop-shadow(0 22px 26px rgba(0,0,0,.55)); }
+  .arte :global(.g) { position: absolute; bottom: -4%; width: 34%; filter: drop-shadow(0 10px 12px rgba(0,0,0,.5)); }
+  .arte :global(.g1) { left: -10%; }
+  .arte :global(.g2) { right: -10%; }
+  h1 { font-size: clamp(2.2rem, 10vw, 3.4rem); color: #ffe08a; text-shadow: 0 0 30px rgba(255, 201, 74, .5); }
+  .texto { text-align: center; }
+  @media (min-width: 860px) { .texto { text-align: left; } }
+  .progreso b { color: var(--como); }
+  .materiales { list-style: none; padding: 0; margin: 0; display: grid; gap: 16px; }
+  @media (min-width: 640px) { .materiales { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 1000px) { .materiales { grid-template-columns: repeat(3, 1fr); } }
+  .material {
+    scroll-margin-top: 90px; display: flex; flex-direction: column; align-items: flex-start; gap: 6px; padding: 22px 20px; border-radius: 24px;
+    background: linear-gradient(160deg, color-mix(in srgb, var(--c) 22%, #161b5a), #121650 75%);
+    border: 2px solid color-mix(in srgb, var(--c) 55%, transparent);
+  }
+  .material:target { box-shadow: 0 0 0 4px var(--c), 0 0 40px var(--c); }
+  .material :global(.ico) { width: 72px; }
+  .material h2 { font-size: 1.5rem; margin: 0; color: color-mix(in srgb, var(--c) 50%, white); }
+  .material p { color: var(--texto-suave); flex: 1; }
+</style>

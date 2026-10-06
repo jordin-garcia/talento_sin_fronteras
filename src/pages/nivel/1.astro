@@ -1,0 +1,235 @@
+---
+// Nivel 1 · Módulo 1 · Apoyo total (R-3.x)
+import { Image } from 'astro:assets';
+import Nivel from '../../layouts/Nivel.astro';
+import Pregunta from '../../components/Pregunta.astro';
+import { img } from '../../data/imagenes';
+
+const formula = [
+  { clase: 'p-quien', rotulo: 'QUIÉN', titulo: '¿Qué papel tiene el asistente?', explica: 'Igual que cuando le explica a un ayudante nuevo lo que va a hacer.', ejemplo: 'Actúa como un asesor que ayuda a redactar currículums.' },
+  { clase: 'p-que', rotulo: 'QUÉ', titulo: '¿Qué necesita y cuál es su situación?', explica: 'Cuanto más claro, mejor.', ejemplo: 'Necesito presentar mi experiencia en cocina. Trabajé cuatro años en un restaurante, preparando alimentos y manteniendo la cocina limpia.' },
+  { clase: 'p-como', rotulo: 'CÓMO', titulo: '¿En qué forma quiere la respuesta?', explica: 'Corto, largo, en lista, con palabras sencillas…', ejemplo: 'Escríbelo en tres frases cortas y con palabras sencillas.' },
+];
+
+const cartas = [
+  { t: 'Su número de DPI', si: false, p: 'El DPI es un dato delicado. Nunca lo escriba en la herramienta.' },
+  { t: 'Que trabajó 4 años en una cocina', si: true, p: 'Su experiencia sí se puede contar: es justo lo que el asistente necesita.' },
+  { t: 'Su contraseña de Facebook o del correo', si: false, p: 'Las contraseñas nunca se comparten con nadie.' },
+  { t: 'El tipo de trabajo que busca', si: true, p: 'Decir el puesto que busca ayuda a que la respuesta sea mejor.' },
+  { t: 'Su situación migratoria', si: false, p: 'No hace falta y le puede causar problemas. Es su información.' },
+  { t: 'Su dirección exacta', si: false, p: 'No se necesita. En el currículum basta con el municipio, y lo escribe usted.' },
+  { t: 'Las herramientas que sabe usar', si: true, p: 'Las herramientas y los idiomas que maneja hacen más fuerte su currículum.' },
+  { t: 'Los datos de su cuenta del banco', si: false, p: 'Los datos del banco nunca se comparten con la herramienta.' },
+];
+---
+
+<Nivel n={1} poseGuia="celular" saludo="¡Hola! Soy Ixchel. Usted ya sabe hacer muchas cosas: trabajó, se adaptó a lugares nuevos y salió adelante. Hoy le presento a un ayudante que escribe muy rápido.">
+  <div class="actividad">
+    <!-- ¿Qué es? -->
+    <article class="tarjeta" data-revelar>
+      <h3 class="act-titulo"><Image src={img('ico-asistente')} alt="" width={96} /> ¿Qué es un asistente de IA?</h3>
+      <p>Es un programa con el que usted <b>conversa por escrito</b>, casi como por WhatsApp. Usted escribe lo que necesita y el programa le responde con un texto.</p>
+      <div class="chat" aria-label="Ejemplo de conversación (ficticio)">
+        <p class="burbuja yo">¿Me ayudas a escribir un mensaje para preguntar por un trabajo?</p>
+        <p class="burbuja ia"><span class="escribiendo" aria-hidden="true"><i></i><i></i><i></i></span><span class="resp">¡Claro! Dime para qué puesto es y te propongo un mensaje corto y respetuoso.</span></p>
+      </div>
+      <p class="aviso-ayudante">Pero fíjese bien: <b>es solo un ayudante.</b> No es una persona, no conoce su vida y no es una autoridad. <b>Usted decide</b> qué se queda y qué se cambia.</p>
+    </article>
+
+    <!-- Qué esperar -->
+    <div class="grid-2" data-revelar>
+      <article class="tarjeta">
+        <h3>✔ Sirve para</h3>
+        <ul class="lista-si"><li>Redactar mensajes y textos</li><li>Ordenar sus ideas</li><li>Explicar algo con palabras sencillas</li></ul>
+      </article>
+      <article class="tarjeta">
+        <h3>✖ No confíe en él para</h3>
+        <ul class="lista-no"><li>Trámites</li><li>Plazos y requisitos</li><li>Leyes y derechos</li></ul>
+        <p class="nota-roja">A veces se equivoca <b>y no avisa</b>. Eso se consulta siempre en la institución que corresponde.</p>
+      </article>
+    </div>
+
+    <!-- La fórmula -->
+    <article class="tarjeta formula" data-revelar data-formula>
+      <span class="sobretitulo">La fórmula</span>
+      <h3>Quién · Qué · Cómo</h3>
+      <p>Si pide algo vago, recibe algo vago. Si pide con claridad, recibe algo mucho mejor. Toque cada parte:</p>
+      <ol class="partes">
+        {formula.map((f, i) => (
+          <li class:list={['parte-tarjeta', f.clase]} data-parte={i}>
+            <button type="button" class="parte-cabeza" aria-expanded="false">
+              <span class="paso-num">{i + 1}</span>
+              <span><b class="rot">{f.rotulo}</b><br />{f.titulo}</span>
+            </button>
+            <div class="parte-cuerpo">
+              <p>{f.explica}</p>
+              <p class="ejemplo">Ejemplo: «{f.ejemplo}»</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+      <button type="button" class="boton" data-unir>✨ Unir las tres partes</button>
+      <div class="unida" hidden>
+        <p class="etiqueta-ficticio">Ejemplo ficticio</p>
+        <p class="frase">
+          {formula.map((f) => <span class:list={['trozo', f.clase]}>{f.ejemplo} </span>)}
+        </p>
+        <p class="recuerde">Quién, qué y cómo. Si se le olvida alguna parte, no pasa nada: puede volver a intentarlo.</p>
+      </div>
+    </article>
+
+    <!-- Juego -->
+    <article class="tarjeta juego" data-revelar data-juego>
+      <span class="sobretitulo">Juego · Regla 1</span>
+      <h3>¿Lo compartiría con la IA?</h3>
+      <p>Lea cada tarjeta y decida. <b>Nunca comparta</b> datos que le puedan causar problemas.</p>
+      <div class="mazo">
+        {cartas.map((c, i) => (
+          <div class="carta" data-si={c.si ? '1' : '0'} data-porque={c.p} hidden={i > 0}>
+            <p class="contador">Tarjeta {i + 1} de {cartas.length}</p>
+            <p class="dato">{c.t}</p>
+            <div class="botones">
+              <button type="button" class="boton verde chico" data-resp="1">✔ Sí, se puede</button>
+              <button type="button" class="boton chico rojo" data-resp="0">✖ No, nunca</button>
+            </div>
+            <p class="fb" role="status" aria-live="polite"></p>
+            <button type="button" class="boton-texto siguiente" hidden>Siguiente tarjeta ›</button>
+          </div>
+        ))}
+        <div class="final" hidden>
+          <p class="puntaje"></p>
+          <p>Recuerde: <b>nunca comparta</b> su DPI o pasaporte, su dirección exacta, su situación migratoria, contraseñas ni datos del banco.</p>
+          <button type="button" class="boton secundario chico" data-reiniciar>Jugar otra vez</button>
+        </div>
+      </div>
+    </article>
+
+    <!-- Verificar -->
+    <article class="tarjeta" data-revelar>
+      <span class="sobretitulo">Regla 2</span>
+      <h3>Siempre verifique</h3>
+      <Pregunta
+        pregunta="La herramienta de IA le dice: «Usted tiene 30 días para hacer su trámite». ¿Qué hace?"
+        opciones={[
+          { texto: 'Le creo: la IA lo sabe todo.', porque: 'La IA puede escribir algo falso con mucha seguridad. Los plazos se confirman en la institución que corresponde.' },
+          { texto: 'Lo confirmo en la institución que corresponde.', correcta: true, porque: 'Trámites, plazos, requisitos y derechos laborales siempre se confirman en la institución, como el Ministerio de Trabajo.' },
+          { texto: 'Se lo reenvío a mis amigos para que lo sepan.', porque: 'Si la información es falsa, la estaría compartiendo. Primero hay que confirmarla.' },
+        ]}
+      />
+    </article>
+
+    <div class="alerta verde" data-revelar>
+      <span aria-hidden="true">⭐</span>
+      <span>Repaso: un asistente de IA es un ayudante que escribe rápido, pero puede equivocarse. Use la fórmula <b>quién, qué y cómo</b>, y recuerde: <b>nunca comparta, siempre verifique.</b></span>
+    </div>
+  </div>
+</Nivel>
+
+<style>
+  .chat { display: grid; gap: 10px; margin: 14px 0; padding: 14px; border-radius: 18px; background: rgba(0,0,0,.25); }
+  .burbuja { margin: 0; padding: 10px 14px; border-radius: 18px; max-width: 85%; font-weight: 600; }
+  .yo { justify-self: end; background: #2f7a5c; border-bottom-right-radius: 4px; }
+  .ia { justify-self: start; background: #3a3f9e; border-bottom-left-radius: 4px; min-height: 44px; }
+  .escribiendo { display: inline-flex; gap: 4px; }
+  .escribiendo i { width: 8px; height: 8px; border-radius: 50%; background: #fff; opacity: .6; animation: punto 1s infinite; }
+  .escribiendo i:nth-child(2) { animation-delay: .15s; } .escribiendo i:nth-child(3) { animation-delay: .3s; }
+  @keyframes punto { 50% { transform: translateY(-4px); opacity: 1; } }
+  .resp { display: none; }
+  .chat.listo .escribiendo { display: none; }
+  .chat.listo .resp { display: inline; }
+  .aviso-ayudante { margin: 0; }
+  .nota-roja { margin: 12px 0 0; color: #ffc2ca; font-weight: 600; }
+
+  .partes { list-style: none; padding: 0; margin: 0 0 16px; display: grid; gap: 10px; }
+  .parte-tarjeta { border-radius: 18px; border: 2px solid var(--c); background: color-mix(in srgb, var(--c) 14%, transparent); overflow: hidden; }
+  .parte-cabeza { all: unset; box-sizing: border-box; cursor: pointer; display: flex; gap: 12px; align-items: center; width: 100%; padding: 12px 14px; min-height: 60px; font-weight: 700; }
+  .parte-cabeza:focus-visible { outline: 3px solid var(--oro); outline-offset: -3px; }
+  .rot { font-family: var(--fuente-titulo); font-size: 1.2rem; color: var(--c); letter-spacing: 0.06em; }
+  .parte-cuerpo { max-height: 0; overflow: hidden; padding: 0 14px; transition: max-height .4s ease, padding .4s ease; }
+  .abierta .parte-cuerpo { max-height: 260px; padding-bottom: 12px; }
+  .parte-cuerpo p { margin: 0 0 6px; }
+  .ejemplo { font-style: italic; color: #fff; background: rgba(0,0,0,.2); padding: 8px 10px; border-radius: 10px; }
+  .unida { margin-top: 16px; }
+  .frase { font-size: 1.1rem; line-height: 1.8; margin: 8px 0; }
+  .trozo { padding: 2px 6px; border-radius: 6px; background: color-mix(in srgb, var(--c) 30%, transparent); box-decoration-break: clone; -webkit-box-decoration-break: clone; opacity: 0; transition: opacity .5s; }
+  .unida.mostrar .trozo { opacity: 1; }
+  .unida.mostrar .trozo:nth-child(2) { transition-delay: .5s; }
+  .unida.mostrar .trozo:nth-child(3) { transition-delay: 1s; }
+  .recuerde { color: var(--texto-suave); margin: 0; }
+
+  .mazo { position: relative; }
+  .carta { padding: 20px 16px; border-radius: 20px; text-align: center; background: linear-gradient(160deg, #2b2f86, #1b1f5e); border: 2px solid rgba(255,255,255,.18); animation: entrar .45s cubic-bezier(.2,1.3,.4,1); }
+  @keyframes entrar { from { transform: translateY(20px) rotate(-3deg) scale(.95); opacity: 0; } }
+  .contador { margin: 0; font-size: .85rem; color: var(--texto-suave); font-weight: 700; }
+  .dato { font-family: var(--fuente-titulo); font-size: clamp(1.4rem, 6vw, 1.9rem); font-weight: 800; margin: 6px 0 14px; }
+  .botones { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+  .rojo { --bg: linear-gradient(180deg, #ff8494, #e8475d); color: #3a0010; box-shadow: 0 6px 0 #a82337; }
+  .fb { margin: 14px 0 0; font-weight: 700; min-height: 1.4em; }
+  .fb.bien { color: #8ff0c1; } .fb.mal { color: #ffb0bb; }
+  .final { text-align: center; padding: 18px; border-radius: 20px; background: rgba(58, 208, 138, .14); border: 2px solid rgba(58, 208, 138, .5); }
+  .puntaje { font-family: var(--fuente-titulo); font-size: 1.8rem; font-weight: 800; margin: 0; }
+</style>
+
+<script>
+  import { confeti } from '../../scripts/utilidades';
+  // Chat que "escribe"
+  const chat = document.querySelector('.chat');
+  if (chat) new IntersectionObserver((e, o) => { if (e[0].isIntersecting) { setTimeout(() => chat.classList.add('listo'), 1400); o.disconnect(); } }).observe(chat);
+
+  // Fórmula
+  const f = document.querySelector<HTMLElement>('[data-formula]')!;
+  f.querySelectorAll<HTMLElement>('.parte-tarjeta').forEach((p) => {
+    const b = p.querySelector<HTMLButtonElement>('.parte-cabeza')!;
+    b.addEventListener('click', () => { const a = p.classList.toggle('abierta'); b.setAttribute('aria-expanded', String(a)); });
+  });
+  f.querySelector('[data-unir]')!.addEventListener('click', () => {
+    f.querySelectorAll('.parte-tarjeta').forEach((p) => p.classList.add('abierta'));
+    const u = f.querySelector<HTMLElement>('.unida')!;
+    u.hidden = false;
+    requestAnimationFrame(() => requestAnimationFrame(() => u.classList.add('mostrar')));
+    u.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  });
+
+  // Juego ¿Lo compartiría?
+  const j = document.querySelector<HTMLElement>('[data-juego]')!;
+  const cartas = [...j.querySelectorAll<HTMLElement>('.carta')];
+  const final = j.querySelector<HTMLElement>('.final')!;
+  let aciertos = 0;
+  cartas.forEach((c, i) => {
+    const fb = c.querySelector<HTMLElement>('.fb')!;
+    const sig = c.querySelector<HTMLButtonElement>('.siguiente')!;
+    c.querySelectorAll<HTMLButtonElement>('[data-resp]').forEach((b) =>
+      b.addEventListener('click', () => {
+        if (c.dataset.respondida) return;
+        c.dataset.respondida = '1';
+        const ok = b.dataset.resp === c.dataset.si;
+        if (ok) aciertos++;
+        fb.className = 'fb ' + (ok ? 'bien' : 'mal');
+        fb.textContent = (ok ? '¡Correcto! ' : 'Ojo: ') + c.dataset.porque;
+        c.querySelectorAll<HTMLButtonElement>('[data-resp]').forEach((x) => (x.disabled = x !== b));
+        sig.hidden = false;
+        sig.focus();
+      })
+    );
+    sig.addEventListener('click', () => {
+      c.hidden = true;
+      if (cartas[i + 1]) cartas[i + 1].hidden = false;
+      else {
+        final.hidden = false;
+        final.querySelector('.puntaje')!.textContent = `¡${aciertos} de ${cartas.length} correctas!`;
+        if (aciertos >= cartas.length - 1) confeti();
+      }
+    });
+  });
+  j.querySelector('[data-reiniciar]')!.addEventListener('click', () => {
+    aciertos = 0;
+    final.hidden = true;
+    cartas.forEach((c, i) => {
+      delete c.dataset.respondida;
+      c.hidden = i > 0;
+      c.querySelector('.fb')!.textContent = '';
+      c.querySelector<HTMLElement>('.siguiente')!.hidden = true;
+      c.querySelectorAll<HTMLButtonElement>('[data-resp]').forEach((x) => (x.disabled = false));
+    });
+  });
+</script>

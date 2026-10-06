@@ -1,0 +1,53 @@
+---
+import { Image } from 'astro:assets';
+import { img } from '../data/imagenes';
+import { NUNCA_COMPARTA } from '../data/sitio';
+const { compacto = false } = Astro.props;
+---
+
+<section class:list={['reglas', { seccion: !compacto }]} aria-labelledby="reglas-titulo">
+  <div class="contenedor">
+    {!compacto && (
+      <div class="titulo-seccion" data-revelar>
+        <span class="sobretitulo">Más importantes que la fórmula</span>
+        <h2 id="reglas-titulo">Las dos reglas de oro</h2>
+      </div>
+    )}
+    {compacto && <h2 id="reglas-titulo" class="sr-only">Las dos reglas de oro</h2>}
+    <div class="dos">
+      <article class="regla nunca" data-revelar>
+        <Image src={img('ico-candado')} alt="" width={96} class="ico flotar" />
+        <h3>1. Nunca comparta</h3>
+        <p>Con la herramienta de IA no escriba datos que le puedan causar problemas:</p>
+        <ul>{NUNCA_COMPARTA.map((d) => <li>✖ {d}</li>)}</ul>
+        <p class="nota">Su teléfono y su correo los escribe usted al final, en su documento, no en la conversación.</p>
+      </article>
+      <article class="regla verifique" data-revelar>
+        <Image src={img('ico-lupa')} alt="" width={96} class="ico flotar" style="animation-delay:-2s" />
+        <h3>2. Siempre verifique</h3>
+        <p>La IA a veces se equivoca <b>y no avisa</b>. Lea todo con calma: ¿las fechas, los nombres y lo que dice son ciertos?</p>
+        <p>Si se trata de <b>trámites, plazos, requisitos o derechos laborales</b>, confírmelo en la institución que corresponde, como el Ministerio de Trabajo o la oficina de atención al migrante.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<style>
+  .reglas.compacto { padding: 0; }
+  .dos { display: grid; gap: 18px; }
+  @media (min-width: 820px) { .dos { grid-template-columns: 1fr 1fr; } }
+  .regla {
+    position: relative; padding: 26px 22px 22px; border-radius: 26px; overflow: hidden;
+    background: linear-gradient(160deg, color-mix(in srgb, var(--c) 26%, #141a55), #121650 70%);
+    border: 2px solid color-mix(in srgb, var(--c) 55%, transparent);
+    box-shadow: 0 20px 40px -22px color-mix(in srgb, var(--c) 70%, black);
+  }
+  .nunca { --c: var(--nunca); }
+  .verifique { --c: var(--verifique); }
+  .regla :global(.ico) { width: 76px; float: right; margin: -8px -4px 8px 10px; filter: drop-shadow(0 8px 10px rgba(0,0,0,.45)); }
+  h3 { color: color-mix(in srgb, var(--c) 60%, white); font-size: clamp(1.45rem, 6vw, 1.9rem); }
+  ul { list-style: none; padding: 0; margin: 0 0 12px; display: flex; flex-wrap: wrap; gap: 8px; clear: both; }
+  li { font-weight: 800; font-size: 0.95rem; padding: 0.35em 0.8em; border-radius: 999px; background: rgba(255, 93, 115, 0.16); border: 1px solid rgba(255, 93, 115, 0.45); }
+  .nota { font-size: 0.95rem; color: var(--texto-suave); margin: 0; }
+  b { color: #fff; }
+</style>

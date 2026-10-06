@@ -1,0 +1,53 @@
+---
+// Pregunta de opción múltiple con retroalimentación inmediata.
+interface Opcion { texto: string; correcta?: boolean; porque: string }
+interface Props { pregunta: string; opciones: Opcion[] }
+const { pregunta, opciones } = Astro.props;
+---
+
+<div class="pregunta" data-pregunta>
+  <p class="enunciado">{pregunta}</p>
+  <div class="opciones">
+    {opciones.map((o, i) => (
+      <button type="button" class="opcion" data-correcta={o.correcta ? '1' : '0'} data-porque={o.porque}>
+        <span class="letra">{String.fromCharCode(65 + i)}</span>{o.texto}
+      </button>
+    ))}
+  </div>
+  <p class="resultado" role="status" aria-live="polite"></p>
+</div>
+
+<style>
+  .enunciado { font-weight: 800; font-size: 1.12rem; }
+  .opciones { display: grid; gap: 10px; }
+  .opcion {
+    display: flex; align-items: center; gap: 12px; text-align: left; min-height: 56px; padding: 10px 14px; cursor: pointer;
+    border-radius: 16px; background: rgba(255,255,255,.07); border: 2px solid var(--borde); font-weight: 700; font-size: 1.02rem;
+    transition: transform .15s, background .2s, border-color .2s;
+  }
+  .opcion:hover { background: rgba(255,255,255,.12); }
+  .opcion:active { transform: scale(0.98); }
+  .letra { flex: none; width: 34px; height: 34px; border-radius: 10px; display: grid; place-items: center; background: rgba(255,255,255,.12); font-family: var(--fuente-titulo); }
+  .opcion.bien { border-color: var(--verifique); background: rgba(58, 208, 138, 0.2); }
+  .opcion.bien .letra { background: var(--verifique); color: #04331c; }
+  .opcion.mal { border-color: var(--nunca); background: rgba(255, 93, 115, 0.16); animation: sacudir .4s; }
+  @keyframes sacudir { 25% { transform: translateX(-6px); } 75% { transform: translateX(6px); } }
+  .resultado { margin: 12px 0 0; font-weight: 700; min-height: 1.5em; }
+  .resultado.bien { color: #8ff0c1; }
+  .resultado.mal { color: #ffb0bb; }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-pregunta]').forEach((q) => {
+    const res = q.querySelector<HTMLElement>('.resultado')!;
+    q.querySelectorAll<HTMLButtonElement>('.opcion').forEach((b) =>
+      b.addEventListener('click', () => {
+        const ok = b.dataset.correcta === '1';
+        q.querySelectorAll('.opcion').forEach((o) => o.classList.remove('mal'));
+        b.classList.add(ok ? 'bien' : 'mal');
+        res.className = 'resultado ' + (ok ? 'bien' : 'mal');
+        res.textContent = (ok ? '¡Muy bien! ' : 'Casi. ') + b.dataset.porque;
+      })
+    );
+  });
+</script>

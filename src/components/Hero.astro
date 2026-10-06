@@ -1,0 +1,120 @@
+---
+import { Image, getImage } from 'astro:assets';
+import { img } from '../data/imagenes';
+import { GUIAS } from '../data/sitio';
+import Luciernagas from './Luciernagas.astro';
+
+const movil = await getImage({ src: img('hero-movil'), width: 1024, format: 'webp', quality: 82 });
+const escritorio = await getImage({ src: img('hero-escritorio'), width: 1600, format: 'webp', quality: 82 });
+---
+
+<section class="hero" aria-labelledby="hero-titulo">
+  <picture class="hero-fondo" aria-hidden="true">
+    <source media="(min-aspect-ratio: 1/1)" srcset={escritorio.src} />
+    <img src={movil.src} alt="" fetchpriority="high" decoding="async" />
+  </picture>
+  <div class="bruma b1" aria-hidden="true"></div>
+  <div class="bruma b2" aria-hidden="true"></div>
+  <Luciernagas cantidad={16} />
+
+  <div class="hero-texto">
+    <p class="hola" data-hero-anim>¡Hola! Bienvenido, bienvenida a</p>
+    <h1 id="hero-titulo" data-hero-anim>
+      <span class="t1">Talento</span>
+      <span class="t2">Sin Fronteras</span>
+    </h1>
+    <p class="lema" data-hero-anim>Usted ya sabe trabajar. Aquí aprenderá a usar la <b>inteligencia artificial</b> desde su teléfono, paso a paso, para presentar su experiencia.</p>
+    <ul class="insignias" data-hero-anim aria-label="Características">
+      <li>✔ Gratis</li><li>✔ Sin registro</li><li>✔ A su ritmo</li>
+    </ul>
+    <div class="acciones" data-hero-anim>
+      <a class="boton" href="#camino" data-comenzar>Comenzar el camino <span aria-hidden="true">›</span></a>
+    </div>
+  </div>
+
+  <div class="guias" aria-hidden="true">
+    <div class="guia guia-nina" data-guia>
+      <span class="resplandor"></span>
+      <Image src={img('ixchel-farol')} alt="" widths={[220, 340, 480]} sizes="(min-width: 900px) 240px, 34vw" loading="eager" class="respirar" />
+    </div>
+    <div class="guia guia-nino" data-guia>
+      <Image src={img('balam-saludo')} alt="" widths={[220, 340, 480]} sizes="(min-width: 900px) 230px, 33vw" loading="eager" class="respirar" />
+    </div>
+  </div>
+  <p class="sr-only">Le acompañan {GUIAS.nina.nombre} y {GUIAS.nino.nombre}, sus guías en el camino.</p>
+
+  <a class="deslice" href="#camino" aria-label="Deslice hacia abajo para ver el camino">
+    <span>Deslice</span>
+    <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </a>
+</section>
+
+<style>
+  .hero {
+    position: relative; min-height: 100svh; overflow: hidden; isolation: isolate;
+    display: flex; flex-direction: column; align-items: center;
+    padding: calc(84px + env(safe-area-inset-top)) 16px 0;
+  }
+  .hero-fondo, .hero-fondo img { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -2; }
+  .hero-fondo img { object-fit: cover; object-position: 50% 70%; transform: scale(1.06); will-change: transform; }
+  .hero::after {
+    content: ''; position: absolute; inset: auto 0 0 0; height: 32%; z-index: -1;
+    background: linear-gradient(180deg, transparent, var(--noche-950) 92%);
+  }
+  .bruma {
+    position: absolute; left: -30%; width: 160%; height: 22%; top: 52%; z-index: -1; pointer-events: none;
+    background: radial-gradient(ellipse at center, rgba(200, 190, 255, 0.28), transparent 65%);
+    filter: blur(8px); animation: bruma 26s linear infinite alternate;
+  }
+  .b2 { top: 60%; opacity: 0.7; animation-duration: 34s; animation-direction: alternate-reverse; }
+  @keyframes bruma { from { transform: translateX(-12%); } to { transform: translateX(12%); } }
+
+  .hero-texto { text-align: center; max-width: 640px; position: relative; z-index: 2; }
+  .hero-texto::before { content: ''; position: absolute; inset: -12% -18%; z-index: -1; border-radius: 50%; background: radial-gradient(ellipse at center, rgba(10, 12, 42, 0.55), transparent 70%); pointer-events: none; }
+  .hola { font-family: var(--fuente-titulo); font-weight: 700; font-size: clamp(1.15rem, 4.8vw, 1.5rem); color: #d9ccff; margin: 0; text-shadow: 0 2px 12px rgba(0,0,0,.6); }
+  h1 { margin: 0.05em 0 0.25em; line-height: 0.92; text-shadow: 0 6px 30px rgba(40, 20, 120, 0.8); }
+  h1 span { display: block; }
+  .t1 { font-size: clamp(3rem, 15vw, 5.6rem); font-weight: 800; color: #fff; }
+  .t2 {
+    font-size: clamp(2.2rem, 11vw, 4.4rem); font-weight: 800;
+    background: linear-gradient(90deg, #ffd56b, #ff9bd2 45%, #8fe9ff); -webkit-background-clip: text; background-clip: text; color: transparent;
+    filter: drop-shadow(0 4px 18px rgba(255, 170, 120, 0.45));
+  }
+  .lema { font-size: clamp(1.02rem, 4.2vw, 1.2rem); font-weight: 600; color: #efeaff; text-shadow: 0 2px 10px rgba(0,0,0,.7); max-width: 30em; margin: 0 auto 0.9em; }
+  .lema b { color: var(--como); }
+  .insignias { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; padding: 0; margin: 0 0 1.1em; }
+  .insignias li { font-weight: 800; font-size: 0.92rem; padding: 0.3em 0.85em; border-radius: 999px; background: rgba(15, 18, 70, 0.6); border: 1px solid rgba(255,255,255,.22); backdrop-filter: blur(6px); }
+  .acciones { display: flex; justify-content: center; }
+  .acciones .boton { font-size: 1.2rem; padding-inline: 1.7em; animation: latido 2.4s ease-in-out infinite; }
+  @keyframes latido { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+
+  .guias { position: relative; margin-top: auto; width: min(760px, 100%); height: clamp(230px, 40svh, 420px); z-index: 1; pointer-events: none; }
+  .guia { position: absolute; bottom: 4%; }
+  .guia :global(img) { width: 100%; height: auto; filter: drop-shadow(0 12px 18px rgba(0,0,0,.55)); }
+  .guia-nina { left: 2%; width: clamp(120px, 33vw, 240px); }
+  .guia-nino { right: 3%; width: clamp(116px, 31vw, 228px); }
+  .guia-nino :global(img) { animation-delay: -1.4s; }
+  .resplandor {
+    position: absolute; width: 70%; aspect-ratio: 1; left: -22%; top: 22%; border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 190, 90, 0.55), transparent 65%); animation: farol 2.2s ease-in-out infinite alternate;
+  }
+  @keyframes farol { from { opacity: 0.6; transform: scale(0.92); } to { opacity: 1; transform: scale(1.08); } }
+
+  .deslice {
+    position: absolute; bottom: calc(10px + env(safe-area-inset-bottom)); left: 50%; transform: translateX(-50%); z-index: 3;
+    display: flex; flex-direction: column; align-items: center; text-decoration: none; font-weight: 800; font-size: 0.85rem;
+    color: #fff; padding: 8px 14px; border-radius: 14px; background: rgba(10, 12, 42, 0.55); border: 1px solid var(--borde);
+    animation: rebote 1.8s ease-in-out infinite;
+  }
+  @keyframes rebote { 0%, 100% { transform: translate(-50%, 0); } 50% { transform: translate(-50%, 6px); } }
+
+  @media (min-width: 900px) {
+    .hero { padding-top: 120px; }
+    .guias { position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: min(1200px, 100%); height: 420px; }
+    .guia-nina { left: 4%; }
+    .guia-nino { right: 4%; }
+  }
+  @media (max-height: 700px) and (max-width: 600px) {
+    .insignias { display: none; }
+  }
+</style>

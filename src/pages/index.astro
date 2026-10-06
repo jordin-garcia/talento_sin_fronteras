@@ -1,0 +1,21 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import Camino from '../components/Camino.astro';
+import MapaCamino from '../components/MapaCamino.astro';
+import Reglas from '../components/Reglas.astro';
+import Cierre from '../components/Cierre.astro';
+---
+
+<Base inicio>
+  <Hero />
+  <Camino />
+  <MapaCamino />
+  <Reglas />
+  <Cierre />
+</Base>
+
+<script>
+  import { iniciarInicio } from '../scripts/animaciones';
+  iniciarInicio();
+</script>

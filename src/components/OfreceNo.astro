@@ -1,0 +1,33 @@
+---
+import { OFRECE, NO_OFRECE } from '../data/sitio';
+const { titulo = 'Lo que esta plataforma ofrece, y lo que no' } = Astro.props;
+---
+
+<section class="ofrece" aria-labelledby="ofrece-titulo">
+  <h2 id="ofrece-titulo" data-revelar>{titulo}</h2>
+  <div class="col2">
+    <div class="col si" data-revelar>
+      <h3>✔ Le ofrece</h3>
+      <ul>{OFRECE.map((t) => <li>{t}</li>)}</ul>
+    </div>
+    <div class="col no" data-revelar>
+      <h3>✖ No le ofrece</h3>
+      <ul>{NO_OFRECE.map((t) => <li>{t}</li>)}</ul>
+    </div>
+  </div>
+  <p class="honesto" data-revelar>Tener un buen currículum ayuda, pero no garantiza un trabajo. Sería injusto prometerle lo contrario.</p>
+</section>
+
+<style>
+  .ofrece { text-align: center; }
+  h2 { font-size: clamp(1.45rem, 5.6vw, 2.1rem); }
+  .col2 { display: grid; gap: 14px; text-align: left; margin-top: 18px; }
+  @media (min-width: 720px) { .col2 { grid-template-columns: 1fr 1fr; } }
+  .col { border-radius: 22px; padding: 20px; background: var(--vidrio); border: 1px solid var(--borde); }
+  .si { border-color: rgba(58, 208, 138, 0.5); }
+  .no { border-color: rgba(255, 93, 115, 0.45); }
+  .si h3 { color: var(--verifique); }
+  .no h3 { color: var(--nunca); }
+  ul { margin: 0; padding-left: 1.1em; display: grid; gap: 6px; }
+  .honesto { margin: 18px auto 0; color: var(--texto-suave); max-width: 34em; font-weight: 600; }
+</style>

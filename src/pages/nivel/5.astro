@@ -1,0 +1,94 @@
+---
+// Nivel 5 · Módulo 4 · Apoyo nulo (R-7.x).
+// IMPORTANTE (R-7.1): en este nivel NO se muestra ninguna instrucción armada ni ejemplo de instrucción.
+import Nivel from '../../layouts/Nivel.astro';
+import BotonesIA from '../../components/BotonesIA.astro';
+import OfreceNo from '../../components/OfreceNo.astro';
+import { url } from '../../scripts/ruta';
+
+const piense = ['¿Qué me cuesta escribir o entender?', '¿Qué me gustaría preparar?', '¿Qué tarea me quita mucho tiempo?'];
+const pasos = [
+  { t: 'Escriba su instrucción con las tres partes: quién, qué y cómo.', extra: true },
+  { t: 'Envíela.' },
+  { t: 'Lea la respuesta con calma y ajústela. Pida cambios, como «hazlo más corto» o «usa palabras más sencillas».' },
+  { t: 'Si lo que le respondió es importante, verifíquelo. Y recuerde no compartir datos personales delicados.' },
+];
+---
+
+<Nivel n={5} poseGuia="saludo" saludo="Hasta ahora le acompañamos paso a paso. Ahora le toca a usted: use lo que aprendió para algo que usted necesite. Nadie le va a dar la instrucción hecha. ¡La va a armar usted!">
+  <div class="actividad">
+    <article class="tarjeta" data-revelar>
+      <span class="sobretitulo">Primero, piense</span>
+      <h3>Elija una necesidad que sea suya</h3>
+      <p>Tómese un momento. Puede pausar el video.</p>
+      <ul class="piense">{piense.map((p, i) => <li style={`--i:${i}`}>{p}</li>)}</ul>
+      <p>Puede ser cualquier cosa: un mensaje para un familiar, una carta, una lista de tareas para un negocio, el significado de una palabra, una idea para vender algo. <b>No hay necesidades grandes ni pequeñas.</b></p>
+    </article>
+
+    <article class="tarjeta" data-revelar data-pasos>
+      <span class="sobretitulo">Ahora, hágalo</span>
+      <h3>Cuatro pasos</h3>
+      <p class="suave">Marque cada paso cuando lo termine.</p>
+      <ol class="pasos">
+        {pasos.map((p, i) => (
+          <li>
+            <label>
+              <input type="checkbox" />
+              <span class="caja" aria-hidden="true">✔</span>
+              <span class="n">{i + 1}</span>
+              <span class="t">{p.t}{p.extra && <> <a href={url('/morral#tarjeta')}>¿Se le olvidó cómo era? Mire la tarjeta de la fórmula.</a></>}</span>
+            </label>
+          </li>
+        ))}
+      </ol>
+      <BotonesIA />
+      <div class="alerta verde logro" hidden data-logro>
+        <span aria-hidden="true">🏆</span>
+        <span><b>¡Lo logró!</b> Armó su propia instrucción, sin ayuda. Eso es lo más importante de toda la ruta.</span>
+      </div>
+      <p class="alerta info">Si no le sale a la primera, no pasa nada. Cambie una sola parte de la instrucción y pruebe otra vez. A todos nos pasa. Y si está en un taller, levante la mano: el facilitador está para ayudarle.</p>
+    </article>
+
+    <article class="tarjeta" data-revelar>
+      <OfreceNo titulo="Lo que este taller es, y lo que no es" />
+      <p class="voluntario">La constancia que va a recibir es de participación: no es una certificación oficial de competencias laborales. Su participación fue voluntaria. <b>No guardamos ni pedimos su currículum, ni lo que usted escribió en la herramienta: eso es suyo.</b></p>
+    </article>
+  </div>
+</Nivel>
+
+<style>
+  .piense { list-style: none; padding: 0; margin: 0 0 14px; display: grid; gap: 10px; }
+  .piense li {
+    font-family: var(--fuente-titulo); font-weight: 700; font-size: 1.25rem; padding: 12px 16px; border-radius: 16px;
+    background: linear-gradient(90deg, rgba(58, 208, 138, .22), transparent); border-left: 5px solid var(--verifique);
+    animation: entrar .7s ease both; animation-delay: calc(var(--i) * .25s);
+  }
+  @keyframes entrar { from { opacity: 0; transform: translateX(-16px); } }
+  .suave { color: var(--texto-suave); }
+  .pasos { list-style: none; padding: 0; margin: 0 0 16px; display: grid; gap: 10px; }
+  .pasos label { display: flex; gap: 12px; align-items: flex-start; padding: 12px 14px; border-radius: 16px; background: rgba(255,255,255,.06); border: 2px solid var(--borde); cursor: pointer; min-height: 56px; }
+  .pasos input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+  .caja { flex: none; width: 30px; height: 30px; border-radius: 9px; display: grid; place-items: center; border: 2px solid var(--texto-suave); color: transparent; font-weight: 900; transition: all .2s; }
+  .pasos input:checked ~ .caja { background: var(--verifique); border-color: var(--verifique); color: #04331c; transform: scale(1.1); }
+  .pasos label:has(input:checked) { border-color: var(--verifique); background: rgba(58, 208, 138, .12); }
+  .pasos label:has(input:focus-visible) { outline: 3px solid var(--oro); outline-offset: 2px; }
+  .n { font-family: var(--fuente-titulo); font-weight: 800; font-size: 1.2rem; color: var(--verifique); }
+  .t { font-weight: 700; }
+  .t a { color: var(--como); }
+  .logro { margin-top: 14px; animation: pop .5s cubic-bezier(.2,1.5,.4,1); }
+  @keyframes pop { from { transform: scale(.8); opacity: 0; } }
+  .alerta.info { margin-top: 14px; }
+  .voluntario { margin: 16px 0 0; color: var(--texto-suave); }
+</style>
+
+<script>
+  import { confeti } from '../../scripts/utilidades';
+  const c = document.querySelector<HTMLElement>('[data-pasos]')!;
+  const cajas = [...c.querySelectorAll<HTMLInputElement>('input[type="checkbox"]')];
+  const logro = c.querySelector<HTMLElement>('[data-logro]')!;
+  cajas.forEach((x) => x.addEventListener('change', () => {
+    const todo = cajas.every((k) => k.checked);
+    if (todo && logro.hidden) confeti();
+    logro.hidden = !todo;
+  }));
+</script>

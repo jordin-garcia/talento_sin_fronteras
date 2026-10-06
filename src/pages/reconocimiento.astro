@@ -1,0 +1,167 @@
+---
+// Reconocimiento digital (R-9.x). Se dibuja y descarga en el teléfono; el nombre no se guarda ni se envía.
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import { img } from '../data/imagenes';
+import { url } from '../scripts/ruta';
+const marco = img('marco-reconocimiento');
+---
+
+<Base titulo="Su reconocimiento" descripcion="Cree y descargue su reconocimiento de participación en Talento Sin Fronteras.">
+  <section class="rec contenedor" data-rec data-marco={marco.src} data-logo={url('/logo.svg')}>
+    <div class="cab">
+      <Image src={img('ixchel-celebra')} alt="" width={180} class="g flotar" />
+      <div>
+        <span class="sobretitulo">¡Felicidades!</span>
+        <h1>Su reconocimiento</h1>
+        <p>Escriba su nombre como quiere que aparezca. Se crea aquí mismo, en su teléfono: <b>su nombre no se guarda ni se envía a ningún lado.</b></p>
+      </div>
+      <Image src={img('balam-celebra')} alt="" width={180} class="g flotar" style="animation-delay:-2s" />
+    </div>
+
+    <p class="alerta info" data-aviso-progreso hidden></p>
+
+    <form class="tarjeta formulario" data-form>
+      <div class="campo">
+        <label for="nombre">Su nombre</label>
+        <input id="nombre" name="nombre" type="text" maxlength="60" autocomplete="off" autocapitalize="words" required />
+      </div>
+      <button class="boton" type="submit">🏅 Crear mi reconocimiento</button>
+    </form>
+
+    <div class="vista" data-vista hidden>
+      <canvas width="1536" height="1024" aria-label="Vista previa del reconocimiento"></canvas>
+      <div class="acciones-fila">
+        <button type="button" class="boton verde" data-descargar>⬇ Descargar imagen</button>
+        <button type="button" class="boton secundario" data-compartir hidden>Compartir</button>
+      </div>
+      <p class="nota">Es un reconocimiento de participación. No es una certificación oficial de competencias laborales.</p>
+    </div>
+    <p class="volver"><a href={url('/morral')}>‹ Volver al morral</a></p>
+  </section>
+</Base>
+
+<style>
+  .rec { padding: 88px 0 40px; display: grid; gap: 18px; }
+  .cab { display: grid; grid-template-columns: 1fr; text-align: center; gap: 4px; justify-items: center; }
+  .cab :global(.g) { width: 110px; display: none; }
+  @media (min-width: 720px) { .cab { grid-template-columns: 140px 1fr 140px; } .cab :global(.g) { display: block; width: 140px; } }
+  h1 { font-size: clamp(2.2rem, 10vw, 3.4rem); color: #ffe08a; }
+  .formulario { display: grid; gap: 14px; max-width: 560px; width: 100%; margin: 0 auto; }
+  .campo > label { font-family: var(--fuente-titulo); font-size: 1.3rem; }
+  .vista { display: grid; gap: 14px; justify-items: center; }
+  canvas { width: 100%; max-width: 900px; height: auto; border-radius: 16px; box-shadow: 0 24px 50px -20px rgba(0,0,0,.8); animation: aparecer .6s cubic-bezier(.2,1.3,.4,1); }
+  @keyframes aparecer { from { transform: scale(.9) rotate(-2deg); opacity: 0; } }
+  .nota { color: var(--texto-suave); text-align: center; font-size: .95rem; margin: 0; }
+  .volver a { color: var(--como); font-weight: 800; }
+</style>
+
+<script>
+  import { cuantos } from '../scripts/progreso';
+  import { confeti, aviso } from '../scripts/utilidades';
+
+  const raiz = document.querySelector<HTMLElement>('[data-rec]')!;
+  const form = raiz.querySelector<HTMLFormElement>('[data-form]')!;
+  const vista = raiz.querySelector<HTMLElement>('[data-vista]')!;
+  const canvas = raiz.querySelector('canvas')!;
+  const ctx = canvas.getContext('2d')!;
+  const compartir = raiz.querySelector<HTMLButtonElement>('[data-compartir]')!;
+
+  const n = cuantos();
+  if (n < 5) {
+    const a = raiz.querySelector<HTMLElement>('[data-aviso-progreso]')!;
+    a.hidden = false;
+    a.textContent = `Lleva ${n} de 5 niveles. Le recomendamos terminar la ruta antes de crear su reconocimiento, pero puede crearlo cuando quiera.`;
+  }
+
+  const cargar = (src: string) => new Promise<HTMLImageElement>((ok, mal) => { const i = new Image(); i.onload = () => ok(i); i.onerror = mal; i.src = src; });
+
+  function ajustar(texto: string, max: number, fuente: (t: number) => string, inicial: number) {
+    let t = inicial;
+    do { ctx.font = fuente(t); t -= 2; } while (ctx.measureText(texto).width > max && t > 20);
+  }
+
+  async function dibujar(nombre: string) {
+    await Promise.all([
+      document.fonts.load('800 80px "Baloo 2"'), document.fonts.load('700 30px "Nunito"'), document.fonts.load('400 30px "Nunito"'),
+    ]);
+    const [marco, logo] = await Promise.all([cargar(raiz.dataset.marco!), cargar(raiz.dataset.logo!)]);
+    const W = canvas.width, H = canvas.height, cx = W / 2;
+    ctx.clearRect(0, 0, W, H);
+    ctx.drawImage(marco, 0, 0, W, H);
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'alphabetic';
+
+    // Logo + nombre de la plataforma
+    ctx.font = '800 40px "Baloo 2"';
+    const marca = 'Talento Sin Fronteras';
+    const anchoMarca = ctx.measureText(marca).width;
+    const L = 74, gap = 16, total = L + gap + anchoMarca, x0 = cx - total / 2;
+    ctx.drawImage(logo, x0, 288, L, L);
+    ctx.textAlign = 'left';
+    ctx.fillStyle = '#3b2280';
+    ctx.fillText(marca, x0 + L + gap, 340);
+    ctx.textAlign = 'center';
+
+    ctx.fillStyle = '#7a3fd0';
+    ctx.font = '800 78px "Baloo 2"';
+    ctx.fillText('RECONOCIMIENTO', cx, 452);
+
+    ctx.fillStyle = '#4a3a6e';
+    ctx.font = '400 30px "Nunito"';
+    ctx.fillText('se otorga a', cx, 500);
+
+    ctx.fillStyle = '#20134f';
+    ajustar(nombre, 980, (t) => `800 ${t}px "Baloo 2"`, 92);
+    ctx.fillText(nombre, cx, 592);
+    const g = ctx.createLinearGradient(cx - 420, 0, cx + 420, 0);
+    g.addColorStop(0, 'rgba(176,107,255,0)'); g.addColorStop(.2, '#b06bff'); g.addColorStop(.5, '#22c3d0'); g.addColorStop(.8, '#ffbf3c'); g.addColorStop(1, 'rgba(255,191,60,0)');
+    ctx.fillStyle = g;
+    ctx.fillRect(cx - 420, 614, 840, 5);
+
+    ctx.fillStyle = '#4a3a6e';
+    ctx.font = '400 30px "Nunito"';
+    ctx.fillText('por recorrer la ruta de aprendizaje', cx, 668);
+    ctx.fillStyle = '#20134f';
+    ctx.font = '700 32px "Nunito"';
+    ctx.fillText('«Inteligencia artificial para su vida laboral»', cx, 712);
+
+    const fecha = new Date().toLocaleDateString('es-GT', { day: 'numeric', month: 'long', year: 'numeric' });
+    ctx.fillStyle = '#4a3a6e';
+    ctx.font = '400 26px "Nunito"';
+    ctx.fillText(fecha, cx, 756);
+    ctx.font = '400 19px "Nunito"';
+    ctx.fillStyle = '#6a5a8e';
+    ctx.fillText('Reconocimiento de participación · No es una certificación oficial de competencias laborales', cx, 790);
+  }
+
+  const archivo = () => new Promise<Blob>((ok) => canvas.toBlob((b) => ok(b!), 'image/png'));
+  const NOMBRE_ARCHIVO = 'reconocimiento-talento-sin-fronteras.png';
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const nombre = (form.nombre as HTMLInputElement).value.trim().replace(/\s+/g, ' ');
+    if (!nombre) return;
+    await dibujar(nombre);
+    vista.hidden = false;
+    vista.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    confeti();
+    try {
+      const f = new File([await archivo()], NOMBRE_ARCHIVO, { type: 'image/png' });
+      compartir.hidden = !(navigator.canShare && navigator.canShare({ files: [f] }));
+    } catch { compartir.hidden = true; }
+  });
+
+  raiz.querySelector('[data-descargar]')!.addEventListener('click', async () => {
+    const u = URL.createObjectURL(await archivo());
+    const a = document.createElement('a');
+    a.href = u; a.download = NOMBRE_ARCHIVO;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(u), 4000);
+    aviso('✔ Reconocimiento descargado. Búsquelo en sus descargas o en la galería');
+  });
+  compartir.addEventListener('click', async () => {
+    const f = new File([await archivo()], NOMBRE_ARCHIVO, { type: 'image/png' });
+    try { await navigator.share({ files: [f], title: 'Mi reconocimiento' }); } catch {}
+  });
+</script>

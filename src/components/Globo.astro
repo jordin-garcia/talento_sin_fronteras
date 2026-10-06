@@ -1,0 +1,30 @@
+---
+// Guía con globo de diálogo.
+import { Image } from 'astro:assets';
+import { img } from '../data/imagenes';
+interface Props { guia: 'ixchel' | 'balam'; pose?: string; nombre: string; lado?: 'izq' | 'der' }
+const { guia, pose = 'saludo', nombre, lado = 'izq' } = Astro.props;
+---
+
+<div class:list={['globo-guia', lado]} data-revelar>
+  <Image src={img(`${guia}-${pose}`)} alt={`${nombre}, guía de la ruta`} widths={[160, 260]} sizes="120px" class="personaje respirar" />
+  <div class="globo">
+    <strong>{nombre}</strong>
+    <p><slot /></p>
+  </div>
+</div>
+
+<style>
+  .globo-guia { display: grid; grid-template-columns: clamp(92px, 26vw, 130px) 1fr; align-items: end; gap: 10px; }
+  .globo-guia.der { grid-template-columns: 1fr clamp(92px, 26vw, 130px); }
+  .der :global(.personaje) { order: 2; }
+  :global(.personaje) { width: 100%; filter: drop-shadow(0 10px 12px rgba(0,0,0,.45)); }
+  .globo {
+    position: relative; align-self: center; padding: 14px 16px; border-radius: 20px;
+    background: #fdf8ff; color: #241a4d; box-shadow: 0 14px 30px -14px rgba(0,0,0,.7);
+  }
+  .globo::before { content: ''; position: absolute; left: -10px; bottom: 26px; border: 12px solid transparent; border-right-color: #fdf8ff; border-left: 0; }
+  .der .globo::before { left: auto; right: -10px; border-right: 0; border-left: 12px solid #fdf8ff; }
+  strong { font-family: var(--fuente-titulo); font-weight: 800; color: #7a3fd0; font-size: 1.1rem; }
+  p { margin: 2px 0 0; font-weight: 700; font-size: 1.02rem; line-height: 1.45; }
+</style>

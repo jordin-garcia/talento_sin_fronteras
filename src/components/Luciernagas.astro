@@ -1,0 +1,20 @@
+---
+// Partículas decorativas (posiciones deterministas para que el HTML sea estable).
+const { cantidad = 14 } = Astro.props;
+const lista = Array.from({ length: cantidad }, (_, i) => {
+  const s = (i * 9301 + 49297) % 233280;
+  const r = (k: number) => ((s * (k + 1) * 7919) % 1000) / 1000;
+  return {
+    left: `${(r(1) * 96 + 2).toFixed(1)}%`,
+    top: `${(r(2) * 90 + 5).toFixed(1)}%`,
+    d: `${(7 + r(3) * 8).toFixed(1)}s`,
+    del: `${(r(4) * 8).toFixed(1)}s`,
+    x: `${Math.round((r(5) - 0.5) * 120)}px`,
+    y: `${Math.round(-30 - r(6) * 90)}px`,
+  };
+});
+---
+
+<div class="luciernagas" aria-hidden="true">
+  {lista.map((l) => <i style={`left:${l.left};top:${l.top};--d:${l.d};--r:${l.del};--x:${l.x};--y:${l.y}`}></i>)}
+</div>

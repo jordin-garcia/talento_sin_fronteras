@@ -1,0 +1,268 @@
+---
+// Nivel 3 · Módulo 2 (generador guiado) · Apoyo parcial (R-5.x)
+import { Image } from 'astro:assets';
+import Nivel from '../../layouts/Nivel.astro';
+import BotonesIA from '../../components/BotonesIA.astro';
+import { img } from '../../data/imagenes';
+import { url } from '../../scripts/ruta';
+
+const puestos = ['Ayudante de cocina', 'Ayudante de albañilería', 'Atención al cliente', 'Auxiliar de bodega', 'Limpieza', 'Seguridad', 'Agricultura', 'Ventas'];
+const ayudas = ['Trabajé ___ años en ___. ', 'Todos los días ___. ', 'Usaba ___. ', 'Hablaba ___. ', 'Era responsable de ___. '];
+const formas = [
+  'Escríbelo como un currículum de una página, con frases cortas',
+  'Escribe solo un perfil de tres líneas',
+  'Hazme una lista de mis habilidades, cada una con una frase corta',
+];
+const cambios = ['Hazlo más corto', 'Usa palabras más sencillas', 'Quita lo que yo no te dije', 'Ordénalo empezando por mi trabajo más reciente'];
+---
+
+<Nivel n={3} poseGuia="celular" saludo="¡Vamos a armar su currículum! Responda tres preguntas con sus palabras. Fíjese: no le vamos a pedir su nombre, ni su documento, ni su dirección. No los necesita.">
+  <div class="actividad">
+    <article class="tarjeta generador" data-revelar data-generador>
+      <div class="gen-cabeza">
+        <Image src={img('ico-generador')} alt="" width={110} class="flotar" />
+        <div>
+          <span class="sobretitulo">Generador guiado</span>
+          <h3>Su instrucción en 3 pasos</h3>
+        </div>
+      </div>
+      <ol class="progreso-pasos" aria-label="Pasos">
+        <li class="activo" data-indicador="1"><span>1</span> Puesto</li>
+        <li data-indicador="2"><span>2</span> Experiencia</li>
+        <li data-indicador="3"><span>3</span> Forma</li>
+      </ol>
+
+      <form novalidate>
+        <fieldset class="paso-gen p-quien" data-paso="1">
+          <legend class="sr-only">Paso 1 de 3</legend>
+          <div class="campo">
+            <label for="g-puesto">1. ¿A qué tipo de trabajo quiere aplicar?</label>
+            <input id="g-puesto" name="puesto" type="text" autocomplete="off" maxlength="80" />
+            <p class="ayuda">Toque una idea o escriba otra:</p>
+            <div class="sugerencias" data-destino="g-puesto" data-modo="reemplazar">
+              {puestos.map((p) => <button type="button" data-valor={p}>{p}</button>)}
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset class="paso-gen p-que" data-paso="2" hidden>
+          <legend class="sr-only">Paso 2 de 3</legend>
+          <div class="campo">
+            <label for="g-exp">2. ¿Qué ha hecho usted?</label>
+            <p class="ayuda">Cuéntelo con sus palabras, como si se lo explicara a un compañero. No se preocupe por escribirlo bonito: el asistente le da forma.</p>
+            <div class="sugerencias" data-destino="g-exp" data-modo="agregar">
+              {ayudas.map((a) => <button type="button" data-valor={a}>+ {a.replace(/ $/, '')}</button>)}
+            </div>
+            <textarea id="g-exp" name="experiencia" rows="6" maxlength="1500"></textarea>
+            <p class="ayuda">Complete los espacios ___ con su información. Recuerde las tres preguntas: ¿qué hacía día a día?, ¿qué herramientas o idiomas usaba?, ¿de qué era responsable?</p>
+          </div>
+        </fieldset>
+
+        <fieldset class="paso-gen p-como" data-paso="3" hidden>
+          <legend class="sr-only">Paso 3 de 3</legend>
+          <div class="campo">
+            <label for="g-forma">3. ¿Cómo quiere recibir el resultado?</label>
+            <div class="formas" role="radiogroup" aria-label="Forma del resultado">
+              {formas.map((f, i) => (
+                <label class="forma"><input type="radio" name="forma" value={f} checked={i === 0} /> <span>{f}</span></label>
+              ))}
+              <label class="forma"><input type="radio" name="forma" value="otra" /> <span>Otra forma (escríbala abajo)</span></label>
+            </div>
+            <input id="g-forma" name="formaOtra" type="text" autocomplete="off" maxlength="160" placeholder="Por ejemplo: en media página" hidden />
+          </div>
+        </fieldset>
+
+        <p class="alerta" data-alerta-pii role="alert" hidden></p>
+        <p class="alerta info" data-alerta-vacio role="alert" hidden></p>
+
+        <div class="nav-pasos">
+          <button type="button" class="boton secundario chico" data-atras hidden>‹ Atrás</button>
+          <button type="button" class="boton" data-siguiente>Siguiente ›</button>
+        </div>
+      </form>
+
+      <div class="resultado-gen" hidden data-resultado tabindex="-1">
+        <h3>✨ ¡Su instrucción está lista!</h3>
+        <p>El generador armó una instrucción con lo que usted respondió. Mire sus <b>tres partes</b>, cada una de un color. Esto no es un adorno: así podrá armar sus propias instrucciones sin ayuda.</p>
+        <div class="instruccion" data-instruccion>
+          <div class="parte p-quien"><b class="rotulo">QUIÉN</b><p data-quien></p></div>
+          <div class="parte p-que"><b class="rotulo">QUÉ</b><p data-que></p></div>
+          <div class="parte p-como"><b class="rotulo">CÓMO</b><p data-como></p></div>
+        </div>
+        <div class="acciones-fila grande">
+          <button type="button" class="boton" data-copiar>📋 Copiar</button>
+          <BotonesIA />
+        </div>
+        <p class="alerta info">🔒 Esta plataforma no guarda nada de lo que usted escribe. Pero la herramienta de IA es otra y tiene sus propias reglas: tampoco escriba ahí su documento, su dirección ni su situación migratoria.</p>
+        <button type="button" class="boton-texto" data-reiniciar>↺ Empezar de nuevo</button>
+      </div>
+    </article>
+
+    <article class="tarjeta" data-revelar>
+      <span class="sobretitulo">Después de pegar y enviar</span>
+      <h3>Revise, corrija y guarde</h3>
+      <ol class="despues">
+        <li><span class="paso-num">1</span><div><b>Pegue y envíe.</b> En la herramienta de IA, mantenga el dedo en el espacio para escribir, elija «Pegar» y toque enviar.</div></li>
+        <li><span class="paso-num">2</span><div><b>Revise frase por frase.</b> ¿Esto es cierto? ¿Yo hice esto? Si el asistente agregó algo que usted no hizo (por ejemplo, un idioma que no habla), bórrelo. Usted responde por lo que dice su currículum.</div></li>
+        <li><span class="paso-num">3</span><div><b>Pida cambios</b> las veces que quiera. Toque una frase para copiarla:
+          <div class="sugerencias cambios">{cambios.map((c) => <button type="button" data-copiar-texto={c}>{c}</button>)}</div>
+        </div></li>
+        <li><span class="paso-num">4</span><div><b>Complete los corchetes.</b> Escriba usted mismo su nombre, teléfono, correo y municipio <b>en el documento</b>, no en la conversación con el asistente.</div></li>
+        <li><span class="paso-num">5</span><div><b>Guárdelo en su teléfono.</b> Copie el texto en la aplicación de notas o guárdelo como archivo. Así lo tendrá aunque no tenga internet.</div></li>
+      </ol>
+      <p class="suave">¿Prefiere completarlo a mano? <a href={url('/materiales/plantilla-curriculum.txt')} download>Descargue la plantilla de currículum</a>.</p>
+    </article>
+  </div>
+</Nivel>
+
+<style>
+  .gen-cabeza { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+  .gen-cabeza :global(img) { width: 76px; flex: none; }
+  .gen-cabeza h3 { margin: 0; }
+  .progreso-pasos { list-style: none; display: flex; gap: 6px; padding: 0; margin: 6px 0 18px; }
+  .progreso-pasos li { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: .82rem; font-weight: 800; color: var(--texto-suave); text-align: center; }
+  .progreso-pasos span { width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; background: rgba(255,255,255,.1); border: 2px solid var(--borde); font-family: var(--fuente-titulo); font-size: 1rem; }
+  .progreso-pasos .activo { color: #fff; }
+  .progreso-pasos .activo span { background: var(--como); color: #3a1d00; border-color: #fff; box-shadow: 0 0 14px rgba(255, 191, 60, .8); }
+  .progreso-pasos .hecho span { background: var(--verifique); color: #04331c; }
+  fieldset { border: 0; padding: 0; margin: 0 0 14px; animation: aparecer .4s ease; }
+  @keyframes aparecer { from { opacity: 0; transform: translateX(20px); } }
+  .campo > label { color: color-mix(in srgb, var(--c) 55%, white); font-family: var(--fuente-titulo); font-size: 1.3rem; }
+  .sugerencias { margin: 4px 0 8px; }
+  .formas { display: grid; gap: 8px; }
+  .forma { display: flex; gap: 10px; align-items: center; padding: 12px 14px; min-height: 56px; border-radius: 16px; background: rgba(255,255,255,.07); border: 2px solid var(--borde); cursor: pointer; font-weight: 700; }
+  .forma:has(input:checked) { border-color: var(--como); background: rgba(255, 191, 60, .14); }
+  .forma input { width: 22px; height: 22px; accent-color: var(--como); flex: none; }
+  #g-forma { margin-top: 8px; }
+  .nav-pasos { display: flex; justify-content: space-between; gap: 10px; margin-top: 8px; }
+  .nav-pasos [data-siguiente] { margin-left: auto; }
+  .resultado-gen { display: grid; gap: 14px; animation: aparecer .5s ease; scroll-margin-top: 90px; }
+  .resultado-gen:focus { outline: none; }
+  .resultado-gen h3 { margin: 0; font-size: 1.6rem; }
+  .instruccion .parte { animation: entrar .6s cubic-bezier(.2,1.3,.4,1) both; }
+  .instruccion .parte:nth-child(2) { animation-delay: .25s; }
+  .instruccion .parte:nth-child(3) { animation-delay: .5s; }
+  @keyframes entrar { from { opacity: 0; transform: translateY(16px) scale(.97); } }
+  .grande [data-copiar] { font-size: 1.3rem; min-height: 60px; padding-inline: 2em; }
+  .despues { list-style: none; padding: 0; margin: 0 0 12px; display: grid; gap: 12px; }
+  .despues li { display: flex; gap: 12px; align-items: flex-start; }
+  .cambios { margin-top: 8px; }
+  .suave { color: var(--texto-suave); margin: 0; }
+  .suave a { color: var(--como); font-weight: 800; }
+</style>
+
+<script>
+  import { datoPersonal, copiar, confeti } from '../../scripts/utilidades';
+  import { armarCurriculum, unir } from '../../scripts/instruccion';
+
+  const g = document.querySelector<HTMLElement>('[data-generador]')!;
+  const form = g.querySelector('form')!;
+  const pasos = [...g.querySelectorAll<HTMLFieldSetElement>('[data-paso]')];
+  const ind = [...g.querySelectorAll<HTMLElement>('[data-indicador]')];
+  const atras = g.querySelector<HTMLButtonElement>('[data-atras]')!;
+  const sig = g.querySelector<HTMLButtonElement>('[data-siguiente]')!;
+  const aPii = g.querySelector<HTMLElement>('[data-alerta-pii]')!;
+  const aVacio = g.querySelector<HTMLElement>('[data-alerta-vacio]')!;
+  const res = g.querySelector<HTMLElement>('[data-resultado]')!;
+  const puesto = g.querySelector<HTMLInputElement>('#g-puesto')!;
+  const exp = g.querySelector<HTMLTextAreaElement>('#g-exp')!;
+  const otra = g.querySelector<HTMLInputElement>('#g-forma')!;
+  let actual = 1;
+  let piiAceptado = false;
+  let texto = '';
+
+  const forma = () => {
+    const v = (form.querySelector<HTMLInputElement>('input[name="forma"]:checked')?.value) || '';
+    return v === 'otra' ? otra.value : v;
+  };
+
+  function mostrar(n: number) {
+    actual = n;
+    pasos.forEach((p) => (p.hidden = Number(p.dataset.paso) !== n));
+    ind.forEach((i) => {
+      const k = Number(i.dataset.indicador);
+      i.classList.toggle('activo', k === n);
+      i.classList.toggle('hecho', k < n);
+    });
+    atras.hidden = n === 1;
+    sig.textContent = n === 3 ? '✨ Armar mi instrucción' : 'Siguiente ›';
+    aPii.hidden = aVacio.hidden = true;
+    piiAceptado = false;
+    pasos[n - 1].querySelector<HTMLElement>('input, textarea')?.focus({ preventScroll: true });
+  }
+
+  // Sugerencias: reemplazar (puesto) o agregar frases de ayuda (experiencia)
+  g.querySelectorAll<HTMLElement>('.sugerencias[data-destino]').forEach((s) =>
+    s.querySelectorAll<HTMLButtonElement>('button').forEach((b) =>
+      b.addEventListener('click', () => {
+        const el = g.querySelector<HTMLInputElement | HTMLTextAreaElement>('#' + s.dataset.destino)!;
+        if (s.dataset.modo === 'reemplazar') {
+          el.value = b.dataset.valor!;
+          s.querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+        } else {
+          el.value = (el.value && !el.value.endsWith(' ') ? el.value + ' ' : el.value) + b.dataset.valor;
+          const i = el.value.lastIndexOf('___');
+          el.focus();
+          if (i >= 0) el.setSelectionRange(i, i + 3);
+        }
+      })
+    )
+  );
+  form.querySelectorAll<HTMLInputElement>('input[name="forma"]').forEach((r) =>
+    r.addEventListener('change', () => { otra.hidden = r.value !== 'otra' || !r.checked; if (!otra.hidden) otra.focus(); })
+  );
+
+  function valorPaso(n: number) {
+    return n === 1 ? puesto.value : n === 2 ? exp.value : forma();
+  }
+
+  sig.addEventListener('click', () => {
+    const v = valorPaso(actual).trim();
+    aVacio.hidden = true;
+    if (!v || (actual === 2 && v.replace(/[_\s.]/g, '').length < 15)) {
+      aVacio.hidden = false;
+      aVacio.textContent = actual === 2 ? 'Cuéntenos un poco más sobre lo que hacía (aunque sea una o dos frases).' : 'Escriba o elija una respuesta para continuar.';
+      return;
+    }
+    if (actual === 2 && v.includes('___')) {
+      aVacio.hidden = false;
+      aVacio.textContent = 'Todavía hay espacios ___ sin completar. Escriba su información en su lugar, o bórrelos.';
+      return;
+    }
+    const d = datoPersonal(v);
+    if (d && !piiAceptado) {
+      aPii.hidden = false;
+      aPii.innerHTML = `⚠ Parece que escribió <b>${d}</b>. Bórrelo: no hace falta para su currículum. Si ya lo revisó y no es un dato personal, toque «Siguiente» otra vez.`;
+      piiAceptado = true;
+      return;
+    }
+    if (actual < 3) return mostrar(actual + 1);
+    // Armar
+    const p = armarCurriculum(puesto.value, exp.value, forma());
+    texto = unir(p);
+    res.querySelector('[data-quien]')!.textContent = p.quien;
+    res.querySelector('[data-que]')!.textContent = p.que;
+    res.querySelector('[data-como]')!.textContent = p.como;
+    form.hidden = true;
+    g.querySelector<HTMLElement>('.progreso-pasos')!.hidden = true;
+    res.hidden = false;
+    res.focus({ preventScroll: true });
+    res.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    confeti(1600);
+  });
+  atras.addEventListener('click', () => mostrar(actual - 1));
+  res.querySelector('[data-copiar]')!.addEventListener('click', () => copiar(texto, res.querySelector<HTMLElement>('[data-instruccion]')!));
+  res.querySelector('[data-reiniciar]')!.addEventListener('click', () => {
+    form.reset();
+    otra.hidden = true;
+    g.querySelectorAll('[aria-pressed]').forEach((x) => x.setAttribute('aria-pressed', 'false'));
+    form.hidden = false;
+    g.querySelector<HTMLElement>('.progreso-pasos')!.hidden = false;
+    res.hidden = true;
+    texto = '';
+    mostrar(1);
+  });
+  document.querySelectorAll<HTMLButtonElement>('[data-copiar-texto]').forEach((b) =>
+    b.addEventListener('click', () => copiar(b.dataset.copiarTexto!, undefined, '✔ Copiado. Péguelo en la conversación con la IA'))
+  );
+</script>
